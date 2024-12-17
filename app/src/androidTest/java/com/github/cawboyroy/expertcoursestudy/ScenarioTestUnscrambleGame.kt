@@ -16,12 +16,14 @@ import org.junit.Rule
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(AndroidJUnit4::class)
-class ScenarioTestUnscrambleGame {
+class ScenarioTestUnscrambleGame(
+
+    private var gamePage: GamePage) {
 
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
-    private lateinit var gamePage: GamePage("facts".reversed())
+    //private lateinit var gamePage: GamePage("facts".reversed())
 
     @Before
     fun setup() {
