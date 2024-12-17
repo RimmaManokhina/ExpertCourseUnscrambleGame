@@ -6,6 +6,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
 import org.hamcrest.Matcher
+import com.github.cawboyroy.expertcoursestudy.R
 
 class GamePage(
     word: String
@@ -13,40 +14,40 @@ class GamePage(
     
 //region fields
     private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.rootLayout))
-    private val classTypeMatcher: Matcher<View> =
+    private val containerClassTypeMatcher: Matcher<View> =
         withParent(isAssignableFrom(LinearLayout::class.java))
 
     private val shuffledWordUi = ShuffledWordUi(
         text = word,
         containerIdMatcher = containerIdMatcher,
-        classTypeMatcher = classTypeMatcher)
+        containerClassTypeMatcher = containerClassTypeMatcher)
 
     private val inputUi = InputUi(
         containerIdMatcher = containerIdMatcher,
-        classTypeMatcher = classTypeMatcher)
+        containerClassTypeMatcher = containerClassTypeMatcher)
 
     private val checkUi = CheckButtonUi(
 //        id = R.id.checkButton(),
 //        textResId = R.string.check,
 //        colorHex = "#E8B931",
         containerIdMatcher = containerIdMatcher,
-        classTypeMatcher = classTypeMatcher
+        containerClassTypeMatcher = containerClassTypeMatcher
     )
 
-    private val skipUi = ButtonId(
+    private val skipUi = ButtonUi(
         id = R.id.skipButton(),
         textResId = R.string.skip,
         colorHex = "#E8B931",
         containerIdMatcher = containerIdMatcher,
-        classTypeMatcher = classTypeMatcher
+        containerClassTypeMatcher = containerClassTypeMatcher
     )
 
-    private val nextUi = ButtonId(
+    private val nextUi = ButtonUi(
         id = R.id.nextButton(),
         textResId = R.string.next,
         colorHex = "#14AE5C",
         containerIdMatcher = containerIdMatcher,
-        classTypeMatcher = classTypeMatcher
+        containerClassTypeMatcher = containerClassTypeMatcher
     )
 //endregion
 
