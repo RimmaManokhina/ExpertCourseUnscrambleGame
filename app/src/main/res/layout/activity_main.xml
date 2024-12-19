@@ -1,19 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="16dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/shuffeledWordTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingVertical="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        tools:text="long long word with 2 lines shvskihv;isrheguis;ihgvieuwhgiwheiuvspigf" />
+    
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="Enter your answer" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Enter your answer"
+            android:inputType="textCapWords"/>
+
+
+    <Space
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/checkButton"
+        android:background="@color/gray"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:layout_width="match_parent"
+        android:text="@string/check" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/skipButton"
+        android:background="@color/yellow"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:layout_width="match_parent"
+        android:text="@string/skip"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@color/green"
+        android:id="@+id/nextButton"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:layout_width="match_parent"
+        android:text="@string/next"/>
+
+
+</LinearLayout>
