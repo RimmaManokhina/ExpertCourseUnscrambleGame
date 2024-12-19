@@ -8,9 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withParent
 import org.hamcrest.Matcher
 import com.github.cawboyroy.expertcoursestudy.R
 
-class GamePage(
-    word: String
-) {
+class GamePage(word: String) {
     
 //region fields
     private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.rootLayout))

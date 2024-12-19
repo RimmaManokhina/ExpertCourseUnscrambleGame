@@ -16,104 +16,104 @@ import org.junit.Rule
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(AndroidJUnit4::class)
-class ScenarioTestUnscrambleGame(
-
-    private var gamePage: GamePage) {
+class ScenarioTestUnscrambleGame () {
+//    (
+//
+//    private var gamePage: GamePage) {
 
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
     //private lateinit var gamePage: GamePage("facts".reversed())
 
-    @Before
-    fun setup() {
-        gamePage = GamePage(word = "facts".reversed())
-    }
+//    @Before
+//    fun setup() {
+//        gamePage = GamePage(word = "facts".reversed())
+//    }
 
     /**
      * Unscramble game test case
      * UGTC-01 happy pass
      */
     @Test
-    fun caseNumber1() {
-        gamePage.assertInitialState()
+    fun caseNumber1() = with(GamePage(word = "facts".reversed())) {
+        assertInitialState()
 
-        gamePage.addInput(text = "fact")
-        gamePage.assertInsufficientState()
+        addInput(text = "fact")
+        assertInsufficientState()
 
-        gamePage.addInput(text = "s")
-        gamePage.asserSufficientState()
+        addInput(text = "s")
+        asserSufficientState()
 
-        gamePage.clickCheck()
-        gamePage.assertCorrectState()
+        clickCheck()
+        assertCorrectState()
 
-        gamePage.clickNext()
-        gamePage = GamePage(word = "never".reversed())
-        gamePage.assertInitialState()
+        clickNext()
+        GamePage(word = "never".reversed())
+        assertInitialState()
     }
 
     /**
      * UGTC-02 other
      */
     @Test
-    fun caseNumber2() {
-        gamePage.assertInitialState()
+    fun caseNumber2() = with(GamePage(word = "facts".reversed())) {
+        assertInitialState()
 
-        gamePage.clickSkip()
-        gamePage= GamePage (word = "never".reversed())
-        gamePage.assertInitialState()
+        clickSkip()
+        GamePage (word = "never".reversed())
+        assertInitialState()
 
-        gamePage.addInput(text = "neve")
-        gamePage.assertInsufficientState()
+        addInput(text = "neve")
+        assertInsufficientState()
 
-        gamePage.clickSkip()
-        gamePage= GamePage (word = "entertain".reversed())
-        gamePage.assertInitialState()
+        clickSkip()
+        GamePage (word = "entertain".reversed())
+        assertInitialState()
 
-        gamePage.addInput(text = "entertai")
-        gamePage.asserSufficientState()
+        addInput(text = "entertai")
+        asserSufficientState()
 
-        gamePage.clickSkip()
-        gamePage= GamePage (word = "alligator".reversed())
-        gamePage.assertInitialState()
+        clickSkip()
+        GamePage (word = "alligator".reversed())
+        assertInitialState()
 
-        gamePage.addInput(text = "alligato")
-        gamePage.assertInsufficientState()
+        addInput(text = "alligato")
+        assertInsufficientState()
 
-        gamePage.addInput(text = "h")
-        gamePage.asserSufficientState()
+        addInput(text = "h")
+        asserSufficientState()
 
-        gamePage.clickCheck()
-        gamePage.assertIncorrectState()
+        clickCheck()
+        assertIncorrectState()
 
-        gamePage.clickSkip()
-        gamePage= GamePage (word = "left".reversed())
-        gamePage.assertInitialState()
-
+        clickSkip()
+        GamePage (word = "left".reversed())
+        assertInitialState()
         //11/
-        gamePage.addInput(text = "lef")
-        gamePage.assertInsufficientState()
+        addInput(text = "lef")
+        assertInsufficientState()
 
-        gamePage.addInput(text = "x")
-        gamePage.asserSufficientState()
+        addInput(text = "x")
+        asserSufficientState()
 
-        gamePage.clickCheck()
-        gamePage.assertIncorrectState()
+        clickCheck()
+        assertIncorrectState()
 
-        gamePage.removeInputLastLetter()
-        gamePage.assertInsufficientState()
+        removeInputLastLetter()
+        assertInsufficientState()
 
-        gamePage.addInput(text = "t")
-        gamePage.asserSufficientState()
+        addInput(text = "t")
+        asserSufficientState()
 
-        gamePage.removeInputLastLetter()
-        gamePage.assertInsufficientState()
+        removeInputLastLetter()
+        assertInsufficientState()
 
-        gamePage.addInput(text = "l")
-        gamePage.asserSufficientState()
+        addInput(text = "l")
+        asserSufficientState()
 
-        gamePage.clickCheck()
-        gamePage.assertIncorrectState()
+        clickCheck()
+        assertIncorrectState()
     }
 
 
