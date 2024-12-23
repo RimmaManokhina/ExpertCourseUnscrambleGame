@@ -14,6 +14,11 @@ import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matcher
 
+/**
+ * Properties
+ * displayed
+ */
+
 class ButtonUi(
     id: Int,
     @StringRes textResId: Int,

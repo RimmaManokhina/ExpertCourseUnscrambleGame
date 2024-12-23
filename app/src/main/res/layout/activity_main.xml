@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingVertical="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
         tools:text="long long word with 2 lines shvskihv;isrheguis;ihgvieuwhgiwheiuvspigf" />
     
     <Space
@@ -29,16 +29,17 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayout"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autofillHints="Enter your answer" />
+        android:layout_height="wrap_content" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputEditText"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="Enter your answer"
-            android:inputType="textCapWords"/>
+            tools:text="Enter your answer"
+            android:inputType="textCapWords" />
 
 
     <Space

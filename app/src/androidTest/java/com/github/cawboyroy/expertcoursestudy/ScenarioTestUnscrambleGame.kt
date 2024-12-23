@@ -38,18 +38,29 @@ class ScenarioTestUnscrambleGame () {
     @Test
     fun caseNumber1() = with(GamePage(word = "facts".reversed())) {
         assertInitialState()
+        activityScenarioRule.scenario.recreate()
 
+        assertInitialState()
         addInput(text = "fact")
         assertInsufficientState()
+        activityScenarioRule.scenario.recreate()
 
+        assertInsufficientState()
         addInput(text = "s")
         asserSufficientState()
+        activityScenarioRule.scenario.recreate()
 
+        asserSufficientState()
         clickCheck()
         assertCorrectState()
+        activityScenarioRule.scenario.recreate()
 
+        assertCorrectState()
         clickNext()
         GamePage(word = "never".reversed())
+        assertInitialState()
+        activityScenarioRule.scenario.recreate()
+
         assertInitialState()
     }
 
