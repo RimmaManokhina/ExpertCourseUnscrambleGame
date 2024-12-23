@@ -15,6 +15,13 @@ import com.github.cawboyroy.expertcoursestudy.R
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.Matcher
 
+
+/**
+ * Properties
+ * text
+ * displayed
+ */
+
 class ShuffledWordUi(
     text: String,
     containerIdMatcher: Matcher<View>,

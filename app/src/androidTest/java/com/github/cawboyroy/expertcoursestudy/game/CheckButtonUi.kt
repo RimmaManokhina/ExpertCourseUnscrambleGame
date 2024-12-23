@@ -18,6 +18,14 @@ import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matcher
 
+/**
+ * Properties
+ * color
+ * enabled
+ * clickable
+ * displayed
+ */
+
 class CheckButtonUi(
     containerIdMatcher: Matcher<View>,
     containerClassTypeMatcher: Matcher<View>
