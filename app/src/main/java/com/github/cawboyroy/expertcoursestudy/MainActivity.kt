@@ -5,6 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.addTextChangedListener
 import com.github.cawboyroy.expertcoursestudy.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,5 +19,33 @@ class MainActivity : AppCompatActivity() {
         }
         val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val viewModel: GameViewModel = GameViewModel()
+
+        val uiState: GameUiState = viewModel.init()
+        uiState.update(binding = binding)
+
+        binding.inputEditText.addTextChangedListener {
+            val uiState: GameUiState = viewModel.handleUserInput(text = it.toString())
+            uiState.update(binding = binding)
+        }
+
+        binding.checkButton.setOnClickListener {
+            val uiState: GameUiState = viewModel.check(text = binding.inputEditText.text.toString())
+            uiState.update(binding = binding)
+        }
+
+        binding.skipButton.setOnClickListener {
+            val uiState: GameUiState = viewModel.skip()
+            uiState.update(binding = binding)
+        }
+
+        binding.nextButton.setOnClickListener {
+            val uiState: GameUiState = viewModel.next()
+            uiState.update(binding = binding)
+        }
+
+
+
     }
 }
