@@ -16,20 +16,17 @@ import org.junit.Rule
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(AndroidJUnit4::class)
-class ScenarioTestUnscrambleGame () {
-//    (
-//
-//    private var gamePage: GamePage) {
+class ScenarioTestUnscrambleGame (private var gamePage: GamePage) {
 
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
-    //private lateinit var gamePage: GamePage("facts".reversed())
+    private var gamePage: GamePage? = null("facts".reversed())
 
-//    @Before
-//    fun setup() {
-//        gamePage = GamePage(word = "facts".reversed())
-//    }
+    @Before
+    fun setup() {
+        gamePage = GamePage(word = "facts".reversed())
+    }
 
     /**
      * Unscramble game test case
@@ -126,12 +123,7 @@ class ScenarioTestUnscrambleGame () {
         clickCheck()
         assertIncorrectState()
     }
-
-
 }
-
-
-
 //"facts",
 //"never",
 //"entertain",

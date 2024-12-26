@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
         val viewModel: GameViewModel = GameViewModel()
 
