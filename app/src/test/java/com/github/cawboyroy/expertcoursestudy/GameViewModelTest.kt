@@ -25,8 +25,8 @@ class GameViewModelTest {
         var expected: GameUiState = GameUiState.Initial(shuffledWord = "f1")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "f")
-        expected = GameUiState.Insufficient(shuffledWord = "f1")
+        actual = viewModel.handleUserInput(text = "1")
+        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f1")
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "1f")
@@ -64,7 +64,7 @@ class GameViewModelTest {
         click Skip
         state is 1 InitialState (another word)*/
         actual = viewModel.handleUserInput(text = "f")
-        expected = GameUiState.Insufficient(shuffledWord = "f2")
+        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f2")
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
@@ -78,7 +78,7 @@ class GameViewModelTest {
         6 click Skip
         state is 1 InitialState (another word)*/
         actual = viewModel.handleUserInput(text = "3")
-        expected = GameUiState.Insufficient(shuffledWord = "f3")
+        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f3")
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "3f")
@@ -97,11 +97,11 @@ class GameViewModelTest {
         state is 4 InCorrectState
         10 click Skip
         state is 1 InitialState (another word)*/
-        actual = viewModel.handleUserInput(text = "f")
-        expected = GameUiState.Insufficient(shuffledWord = "f4")
+        actual = viewModel.handleUserInput(text = "r")
+        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f4")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "4g")
+        actual = viewModel.handleUserInput(text = "r4")
         expected = GameUiState.Sufficient(shuffledWord = "f4")
         assertEquals(expected, actual)
 
@@ -114,23 +114,23 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         /*11 input letter
-        state is 2. InSufficientState
+        state is 2. NotEqualWordsLengths
         12 input letter
         state is 3.SufficientState
         13 click Check
         state is 4 InCorrectState
         14 remove 1 letter
-        state is (2. InSufficientState)
+        state is (2. NotEqualWordsLengths)
         15 input letters
         state is 3.SufficientState
         16 remove letters
-        state is InSufficientState
+        state is NotEqualWordsLengths
         17 input more letters
-        state is SufficientState
-        18 click Check
-        state is 4 InCorrectState*/
+        state is NotEqualWordsLengths
+        18 input more letters
+        state is NotEqualWordsLengths*/
         actual = viewModel.handleUserInput(text = "f")
-        expected = GameUiState.Insufficient(shuffledWord = "f5")
+        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f5")
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "6f")
@@ -142,7 +142,7 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "6")
-        expected = GameUiState.Insufficient(shuffledWord = "f5")
+        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f5")
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "5f")
@@ -150,15 +150,11 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "5")
-        expected = GameUiState.Insufficient(shuffledWord = "f5")
+        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f5")
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "5ff")
-        expected = GameUiState.Sufficient(shuffledWord = "f5")
-        assertEquals(expected, actual)
-
-        actual = viewModel.check(text = "5ff")
-        expected = GameUiState.Incorrect(shuffledWord = "f5")
+        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f5")
         assertEquals(expected, actual)
     }
 }
@@ -183,10 +179,4 @@ private class FakeRepository : GameRepository {
         if (index == originalList.size)
             index = 0
     }
-
-
 }
-
-
-
-

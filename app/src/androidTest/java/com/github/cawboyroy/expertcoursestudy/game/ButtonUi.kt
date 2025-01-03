@@ -18,7 +18,6 @@ import org.hamcrest.Matcher
  * Properties
  * displayed
  */
-
 class ButtonUi(
     id: Int,
     @StringRes textResId: Int,
