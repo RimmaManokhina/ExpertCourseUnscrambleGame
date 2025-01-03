@@ -20,7 +20,21 @@ class MainActivity : AppCompatActivity() {
         val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
 
-        val viewModel: GameViewModel = GameViewModel()
+        val viewModel: GameViewModel = GameViewModel(object : GameRepository {
+
+            override fun shuffledWord(): String {
+                TODO("Not yet implemented")
+            }
+
+            override fun originalWord(): String {
+                TODO("Not yet implemented")
+            }
+
+            override fun next() {
+                TODO("Not yet implemented")
+            }
+        }
+        )
 
         val uiState: GameUiState = viewModel.init()
         uiState.update(binding = binding)
@@ -44,8 +58,6 @@ class MainActivity : AppCompatActivity() {
             val uiState: GameUiState = viewModel.next()
             uiState.update(binding = binding)
         }
-
-
 
     }
 }
