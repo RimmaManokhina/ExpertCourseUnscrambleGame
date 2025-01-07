@@ -4,8 +4,8 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     android:orientation="vertical"
-    android:layout_margin="16dp"
     tools:context=".MainActivity">
 
     <Space
@@ -20,57 +20,59 @@
         android:gravity="center"
         android:paddingVertical="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        tools:text="long long word with 2 lines shvskihv;isrheguis;ihgvieuwhgiwheiuvspigf" />
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit..." />
     
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="textCapWords"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            tools:text="Please, enter your answer"/>
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayout"
-        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEditText"
-            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="Enter your answer"
-            android:inputType="textCapWords" />
-
-
-    <Space
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_width="match_parent" />
-
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/checkButton"
-        android:background="@color/gray"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="8dp"
-        android:layout_width="match_parent"
+        android:background="@color/gray"
         android:text="@string/check" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/skipButton"
-        android:background="@color/yellow"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="8dp"
-        android:layout_width="match_parent"
+        android:background="@color/yellow"
         android:text="@string/skip"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:background="@color/green"
         android:id="@+id/nextButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="8dp"
-        android:layout_width="match_parent"
+        android:background="@color/green"
         android:text="@string/next"/>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
 
 </LinearLayout>

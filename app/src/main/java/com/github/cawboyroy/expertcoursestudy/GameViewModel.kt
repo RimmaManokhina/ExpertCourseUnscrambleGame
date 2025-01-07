@@ -21,8 +21,7 @@ class GameViewModel(private val repository: GameRepository) {
         val originalWord = repository.originalWord()
         val isCorrect = originalWord.equals(text, ignoreCase = true)
 
-        return if (isCorrect)
-            GameUiState.Correct(shuffledWord)
+        return if (isCorrect) GameUiState.Correct(shuffledWord)
         else GameUiState.Incorrect(shuffledWord)
     }
 

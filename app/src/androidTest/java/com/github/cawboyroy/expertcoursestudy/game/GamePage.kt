@@ -2,12 +2,11 @@ package com.github.cawboyroy.expertcoursestudy.game
 
 import android.view.View
 import android.widget.LinearLayout
-
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
-import org.hamcrest.Matcher
 import com.github.cawboyroy.expertcoursestudy.R
+import org.hamcrest.Matcher
 
 class GamePage(word: String) {
     

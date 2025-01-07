@@ -3,12 +3,10 @@ package com.github.cawboyroy.expertcoursestudy
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.github.cawboyroy.expertcoursestudy.game.GamePage
-
-import org.junit.Test
-import org.junit.runner.RunWith
-
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -16,12 +14,12 @@ import org.junit.Rule
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(AndroidJUnit4::class)
-class ScenarioTestUnscrambleGame (private var gamePage: GamePage) {
+class ScenarioTestUnscrambleGame {
 
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
-    private var gamePage: GamePage? = null("facts".reversed())
+    private lateinit var gamePage: GamePage
 
     @Before
     fun setup() {
@@ -124,20 +122,3 @@ class ScenarioTestUnscrambleGame (private var gamePage: GamePage) {
         assertIncorrectState()
     }
 }
-//"facts",
-//"never",
-//"entertain",
-//"alligator",
-//"left",
-//"handle",
-//"panda",
-//"effort",
-//"January",
-//"extra",
-//"camera",
-//"plant",
-//"every",
-//"exit",
-//"spelling",
-//"hello",
-//"clever"
