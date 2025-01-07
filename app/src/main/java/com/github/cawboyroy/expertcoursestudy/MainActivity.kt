@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package com.github.cawboyroy.expertcoursestudy
 
 import android.os.Bundle
@@ -9,32 +11,21 @@ import androidx.core.widget.addTextChangedListener
 import com.github.cawboyroy.expertcoursestudy.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rootLayout)) { v, insets ->
+
+        val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.rootLayout) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_main)
 
-        val viewModel: GameViewModel = GameViewModel(object : GameRepository {
-
-            override fun shuffledWord(): String {
-                TODO("Not yet implemented")
-            }
-
-            override fun originalWord(): String {
-                TODO("Not yet implemented")
-            }
-
-            override fun next() {
-                TODO("Not yet implemented")
-            }
-        }
-        )
+        val viewModel: GameViewModel = GameViewModel(GameRepository.Base())
 
         val uiState: GameUiState = viewModel.init()
         uiState.update(binding = binding)
@@ -58,6 +49,5 @@ class MainActivity : AppCompatActivity() {
             val uiState: GameUiState = viewModel.next()
             uiState.update(binding = binding)
         }
-
     }
 }

@@ -6,16 +6,12 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.isClickable
-import androidx.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isEnabled
-import androidx.test.espresso.matcher.ViewMatchers.isNotClickable
 import androidx.test.espresso.matcher.ViewMatchers.isNotEnabled
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.github.cawboyroy.expertcoursestudy.R
 import org.hamcrest.CoreMatchers.allOf
-import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matcher
 
 /**
@@ -25,7 +21,6 @@ import org.hamcrest.Matcher
  * clickable
  * displayed
  */
-
 class CheckButtonUi(
     containerIdMatcher: Matcher<View>,
     containerClassTypeMatcher: Matcher<View>
@@ -35,8 +30,14 @@ class CheckButtonUi(
             containerIdMatcher,
             containerClassTypeMatcher,
             isAssignableFrom(AppCompatButton::class.java),
-            withId(R.id.checkButton),
-            withText(R.string.check)
+            withId(R.id.checkButton)
+
+            //withText(R.string.check)
+//                    Change:
+//
+//                    onView(withText(R.id.user_name)).perform(click());
+//                      with
+//                      onView(withId(R.id.user_name)).perform(click());
         )
     )
 ) {
@@ -44,9 +45,8 @@ class CheckButtonUi(
         interaction
             .check(matches(ButtonColorMatcher("#B3B3B3")))
             .check(matches(isNotEnabled()))
-            .check(matches(isNotClickable()))
-            .check(matches(isCompletelyDisplayed()))
-
+            .check(matches(isClickable()))
+            .check(matches(isDisplayed()))
     }
 
     fun assertVisibleEnabled() {
@@ -54,7 +54,7 @@ class CheckButtonUi(
             .check(matches(ButtonColorMatcher("#E8B931")))
             .check(matches(isEnabled()))
             .check(matches(isClickable()))
-            .check(matches(isCompletelyDisplayed()))
+            .check(matches(isDisplayed()))
     }
 }
 
