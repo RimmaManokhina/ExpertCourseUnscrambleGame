@@ -34,7 +34,7 @@ interface GameUiState {
         nextVisibility = View.INVISIBLE
     )
 
-    data class NotEqualWordsLengths(private val shuffledWord: String
+    data class Insufficient(private val shuffledWord: String
     ) : Abstract(
         shuffledWord,
         InputUiState.InSufficient,

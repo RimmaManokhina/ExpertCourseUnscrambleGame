@@ -25,9 +25,6 @@ class GamePage(word: String) {
         containerClassTypeMatcher = containerClassTypeMatcher)
 
     private val checkUi = CheckButtonUi(
-//        id = R.id.checkButton(),
-//        textResId = R.string.check,
-//        colorHex = "#E8B931",
         containerIdMatcher = containerIdMatcher,
         containerClassTypeMatcher = containerClassTypeMatcher
     )
@@ -43,7 +40,7 @@ class GamePage(word: String) {
     private val nextUi = ButtonUi(
         id = R.id.nextButton,
         textResId = R.string.next,
-        colorHex = "#14AE5C",
+        colorHex = "#57B05D",
         containerIdMatcher = containerIdMatcher,
         containerClassTypeMatcher = containerClassTypeMatcher
     )
@@ -70,7 +67,7 @@ class GamePage(word: String) {
         nextUi.assertNotVisible()
     }
 
-    fun asserSufficientState() {
+    fun assertSufficientState() {
         shuffledWordUi.assertTextVisible()
         inputUi.assertSufficientState()
         checkUi.assertVisibleEnabled()

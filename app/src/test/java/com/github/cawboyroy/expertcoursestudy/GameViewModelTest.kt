@@ -25,7 +25,7 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "1")
-        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f1")
+        expected = GameUiState.Insufficient(shuffledWord = "f1")
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "1f")
@@ -63,7 +63,7 @@ class GameViewModelTest {
         click Skip
         state is 1 InitialState (another word)*/
         actual = viewModel.handleUserInput(text = "f")
-        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f2")
+        expected = GameUiState.Insufficient(shuffledWord = "f2")
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
@@ -77,7 +77,7 @@ class GameViewModelTest {
         6 click Skip
         state is 1 InitialState (another word)*/
         actual = viewModel.handleUserInput(text = "3")
-        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f3")
+        expected = GameUiState.Insufficient(shuffledWord = "f3")
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "3f")
@@ -97,7 +97,7 @@ class GameViewModelTest {
         10 click Skip
         state is 1 InitialState (another word)*/
         actual = viewModel.handleUserInput(text = "r")
-        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f4")
+        expected = GameUiState.Insufficient(shuffledWord = "f4")
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "r4")
@@ -113,23 +113,23 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         /*11 input letter
-        state is 2. NotEqualWordsLengths
+        state is 2. Insufficient
         12 input letter
         state is 3.SufficientState
         13 click Check
         state is 4 InCorrectState
         14 remove 1 letter
-        state is (2. NotEqualWordsLengths)
+        state is (2. Insufficient)
         15 input letters
         state is 3.SufficientState
         16 remove letters
-        state is NotEqualWordsLengths
+        state is Insufficient
         17 input more letters
-        state is NotEqualWordsLengths
+        state is Insufficient
         18 input more letters
-        state is NotEqualWordsLengths*/
+        state is Insufficient*/
         actual = viewModel.handleUserInput(text = "f")
-        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f5")
+        expected = GameUiState.Insufficient(shuffledWord = "f5")
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "6f")
@@ -141,7 +141,7 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "6")
-        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f5")
+        expected = GameUiState.Insufficient(shuffledWord = "f5")
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "5f")
@@ -149,11 +149,11 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "5")
-        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f5")
+        expected = GameUiState.Insufficient(shuffledWord = "f5")
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "5ff")
-        expected = GameUiState.NotEqualWordsLengths(shuffledWord = "f5")
+        expected = GameUiState.Insufficient(shuffledWord = "f5")
         assertEquals(expected, actual)
     }
 }

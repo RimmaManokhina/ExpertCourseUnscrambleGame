@@ -42,10 +42,10 @@ class ScenarioTestUnscrambleGame {
 
         assertInsufficientState()
         addInput(text = "s")
-        asserSufficientState()
+        assertSufficientState()
         activityScenarioRule.scenario.recreate()
 
-        asserSufficientState()
+        assertSufficientState()
         clickCheck()
         assertCorrectState()
         activityScenarioRule.scenario.recreate()
@@ -78,7 +78,7 @@ class ScenarioTestUnscrambleGame {
         assertInitialState()
 
         addInput(text = "entertai")
-        asserSufficientState()
+        assertSufficientState()
 
         clickSkip()
         GamePage (word = "alligator".reversed())
@@ -88,7 +88,7 @@ class ScenarioTestUnscrambleGame {
         assertInsufficientState()
 
         addInput(text = "h")
-        asserSufficientState()
+        assertSufficientState()
 
         clickCheck()
         assertIncorrectState()
@@ -101,7 +101,7 @@ class ScenarioTestUnscrambleGame {
         assertInsufficientState()
 
         addInput(text = "x")
-        asserSufficientState()
+        assertSufficientState()
 
         clickCheck()
         assertIncorrectState()
@@ -110,13 +110,13 @@ class ScenarioTestUnscrambleGame {
         assertInsufficientState()
 
         addInput(text = "t")
-        asserSufficientState()
+        assertSufficientState()
 
         removeInputLastLetter()
         assertInsufficientState()
 
         addInput(text = "l")
-        asserSufficientState()
+        assertSufficientState()
 
         clickCheck()
         assertIncorrectState()
