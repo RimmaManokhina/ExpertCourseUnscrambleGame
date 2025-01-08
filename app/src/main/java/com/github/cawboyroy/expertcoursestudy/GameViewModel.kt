@@ -13,7 +13,7 @@ class GameViewModel(private val repository: GameRepository) {
 
         return if (isSufficient)
             GameUiState.Sufficient(shuffledWord)
-        else GameUiState.NotEqualWordsLengths(shuffledWord)
+        else GameUiState.Insufficient(shuffledWord)
     }
 
     fun check(text: String): GameUiState {
