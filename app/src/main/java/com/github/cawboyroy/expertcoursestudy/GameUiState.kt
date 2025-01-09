@@ -31,7 +31,7 @@ interface GameUiState {
         InputUiState.Initial,
         CheckUiState.Disabled,
         skipVisibility = View.VISIBLE,
-        nextVisibility = View.INVISIBLE
+        nextVisibility = View.GONE
     )
 
     data class Insufficient(private val shuffledWord: String
@@ -40,7 +40,7 @@ interface GameUiState {
         InputUiState.InSufficient,
         CheckUiState.Disabled,
         skipVisibility = View.VISIBLE,
-        nextVisibility = View.INVISIBLE
+        nextVisibility = View.GONE
     )
 
     data class Sufficient(private val shuffledWord: String
@@ -49,7 +49,7 @@ interface GameUiState {
         InputUiState.Sufficient,
         CheckUiState.Enabled,
         skipVisibility = View.VISIBLE,
-        nextVisibility = View.INVISIBLE
+        nextVisibility = View.GONE
     )
 
     data class Correct(private val shuffledWord: String
@@ -67,6 +67,6 @@ interface GameUiState {
         InputUiState.Incorrect,
         CheckUiState.Disabled,
         skipVisibility = View.VISIBLE,
-        nextVisibility = View.INVISIBLE
+        nextVisibility = View.GONE
     )
 }

@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="8dp"
-        android:background="@color/gray"
+        android:background="@color/blue"
         android:text="@string/check" />
 
     <androidx.appcompat.widget.AppCompatButton

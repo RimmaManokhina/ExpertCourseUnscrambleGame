@@ -62,7 +62,7 @@ class GameViewModelTest {
         state is 2. InSufficientState
         click Skip
         state is 1 InitialState (another word)*/
-        actual = viewModel.handleUserInput(text = "f")
+        actual = viewModel.handleUserInput(text = "2")
         expected = GameUiState.Insufficient(shuffledWord = "f2")
         assertEquals(expected, actual)
 

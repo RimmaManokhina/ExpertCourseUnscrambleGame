@@ -35,10 +35,11 @@ class InputUi(
        )
     )
 
-    private val inputInteraction: ViewInteraction = onView(
-        allOf(
-            isAssignableFrom(TextInputEditText::class.java),
-            withId(R.id.inputEditText)
+    private val inputInteraction: ViewInteraction =
+        onView(
+            allOf(
+                isAssignableFrom(TextInputEditText::class.java),
+                withId(R.id.inputEditText)
         )
     )
 
@@ -70,7 +71,7 @@ fun assertInitialState() {
     fun assertCorrectState() {
         layoutInteraction
             .check(matches(isNotEnabled()))
-            .check(matches(textInputLayoutErrorEnabledMatcherFalse))
+            .check(matches(TextInputLayoutErrorEnabledMatcher(false)))
     }
 
     fun assertIncorrectState() {
