@@ -20,20 +20,22 @@ import org.hamcrest.Matcher
  * displayed
  */
 
-class ShuffledWordUi(
+class ShuffleWordUi(
     text: String,
     containerIdMatcher: Matcher<View>,
     containerClassTypeMatcher: Matcher<View>
 ) {
+
     private val interaction: ViewInteraction = onView(
         allOf(
+            withId(R.id.shuffledWordTextView),
+            withText(text),
             containerIdMatcher,
             containerClassTypeMatcher,
-            withId(R.id.shuffeledWordTextView),
-            withText(text),
             isAssignableFrom(TextView::class.java)
         )
     )
+
     fun assertTextVisible() {
         interaction.check(matches(isCompletelyDisplayed()))
     }

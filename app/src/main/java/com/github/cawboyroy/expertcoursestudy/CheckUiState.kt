@@ -17,6 +17,7 @@ interface CheckUiState {
             isEnabled = enabled
         }
     }
+
     object Disabled : Abstract(View.VISIBLE, false)
 
     object Enabled : Abstract(View.VISIBLE, true)

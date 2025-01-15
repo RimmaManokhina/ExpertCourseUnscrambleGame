@@ -9,6 +9,8 @@ interface GameRepository {
     fun next()
 
     class Base(
+        private val shuffleStrategy: ShuffleStrategy = ShuffleStrategy.Base(),
+
         private val originalList: List<String> = listOf(
             "facts",
             "never",
@@ -30,7 +32,7 @@ interface GameRepository {
         )
     ) : GameRepository {
 
-        private val shuffledList: List<String> = originalList.map {it.reversed()}
+        private val shuffledList = originalList.map { shuffleStrategy.shuffle(it) }
 
         private var index = 0
 
@@ -43,6 +45,22 @@ interface GameRepository {
                 index = 0
             else
                 index++
+        }
+    }
+}
+
+interface ShuffleStrategy {
+    fun shuffle(source: String): String
+    class Base : ShuffleStrategy {
+        override fun shuffle(source: String): String {
+            return source
+            //todo shuffle letters
+        }
+    }
+
+    class Reverse : ShuffleStrategy {
+        override fun shuffle(source: String): String {
+            return source.reversed()
         }
     }
 }

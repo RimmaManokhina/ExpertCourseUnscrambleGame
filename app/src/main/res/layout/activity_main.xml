@@ -14,7 +14,7 @@
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/shuffeledWordTextView"
+        android:id="@+id/shuffledWordTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -36,7 +36,6 @@
             android:id="@+id/inputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:inputType="textCapWords"
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             tools:text="Please, enter your answer"/>

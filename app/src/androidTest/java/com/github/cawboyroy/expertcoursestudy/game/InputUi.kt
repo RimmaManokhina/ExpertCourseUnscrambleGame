@@ -18,65 +18,60 @@ import com.github.cawboyroy.expertcoursestudy.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import org.hamcrest.CoreMatchers.allOf
+import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matcher
 
 class InputUi(
     containerIdMatcher: Matcher<View>,
     containerClassTypeMatcher: Matcher<View>
-)  {
-    private val inputLayoutId: Int = R.id.inputLayout
+) {
 
+    private val inputLayoutId: Int = R.id.inputLayout
     private val layoutInteraction: ViewInteraction = onView(
-       allOf(
-           isAssignableFrom(TextInputLayout::class.java),
-           withId(inputLayoutId),
-           containerIdMatcher,
-           containerClassTypeMatcher
-       )
+        allOf(
+            isAssignableFrom(TextInputLayout::class.java),
+            withId(inputLayoutId),
+            containerClassTypeMatcher,
+            containerIdMatcher
+        )
     )
 
-    private val inputInteraction: ViewInteraction =
-        onView(
-            allOf(
-                isAssignableFrom(TextInputEditText::class.java),
-                withId(R.id.inputEditText)
+    private val inputInteraction: ViewInteraction = onView(
+        allOf(
+            isAssignableFrom(TextInputEditText::class.java),
+            withId(R.id.inputEditText)
         )
     )
 
     private val textInputLayoutErrorEnabledMatcherFalse = TextInputLayoutErrorEnabledMatcher(false)
 
-fun assertInitialState() {
-    layoutInteraction
-        .check(matches(isEnabled()))
-        .check(matches(textInputLayoutErrorEnabledMatcherFalse))
-    inputInteraction.check(matches(withText("")))
-        }
+    fun assertInitialState() {
+        layoutInteraction.check(matches(isEnabled()))
+            .check(matches(textInputLayoutErrorEnabledMatcherFalse))
+        inputInteraction.check(matches(withText("")))
+    }
 
     fun addInput(text: String) {
         inputInteraction.perform(typeText(text), closeSoftKeyboard())
     }
 
     fun assertInsufficientState() {
-        layoutInteraction
-            .check(matches(isEnabled()))
+        layoutInteraction.check(matches(isEnabled()))
             .check(matches(textInputLayoutErrorEnabledMatcherFalse))
     }
 
     fun assertSufficientState() {
-        layoutInteraction
-            .check(matches(isEnabled()))
+        layoutInteraction.check(matches(isEnabled()))
             .check(matches(textInputLayoutErrorEnabledMatcherFalse))
     }
 
     fun assertCorrectState() {
-        layoutInteraction
-            .check(matches(isNotEnabled()))
-            .check(matches(TextInputLayoutErrorEnabledMatcher(false)))
+        layoutInteraction.check(matches(isNotEnabled()))
+            .check(matches(textInputLayoutErrorEnabledMatcherFalse))
     }
 
     fun assertIncorrectState() {
-        layoutInteraction
-            .check(matches(isEnabled()))
+        layoutInteraction.check(matches(isEnabled()))
             .check(matches(TextInputLayoutErrorEnabledMatcher(true)))
             .check(matches(TextInputLayoutHasErrorText(R.string.incorrect_message)))
     }
@@ -85,4 +80,3 @@ fun assertInitialState() {
         inputInteraction.perform(click(), pressKey(KeyEvent.KEYCODE_DEL), closeSoftKeyboard())
     }
 }
-
