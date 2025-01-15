@@ -9,49 +9,50 @@ import com.github.cawboyroy.expertcoursestudy.R
 import org.hamcrest.Matcher
 
 class GamePage(word: String) {
-    
-//region fields
+
+    //region fields
     private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.rootLayout))
     private val containerClassTypeMatcher: Matcher<View> =
         withParent(isAssignableFrom(LinearLayout::class.java))
 
-    private val shuffledWordUi = ShuffledWordUi(
+    private val shuffleWord = ShuffleWordUi(
         text = word,
         containerIdMatcher = containerIdMatcher,
-        containerClassTypeMatcher = containerClassTypeMatcher)
+        containerClassTypeMatcher = containerClassTypeMatcher
+    )
 
     private val inputUi = InputUi(
-        containerIdMatcher = containerIdMatcher,
-        containerClassTypeMatcher = containerClassTypeMatcher)
-
-    private val checkUi = CheckButtonUi(
         containerIdMatcher = containerIdMatcher,
         containerClassTypeMatcher = containerClassTypeMatcher
     )
 
     private val skipUi = ButtonUi(
         id = R.id.skipButton,
-        textResId = R.string.skip,
         colorHex = "#E8B931",
+        textResId = R.string.skip,
         containerIdMatcher = containerIdMatcher,
         containerClassTypeMatcher = containerClassTypeMatcher
     )
 
     private val nextUi = ButtonUi(
         id = R.id.nextButton,
-        textResId = R.string.next,
         colorHex = "#57B05D",
+        textResId = R.string.next,
         containerIdMatcher = containerIdMatcher,
         containerClassTypeMatcher = containerClassTypeMatcher
     )
-//endregion
 
-    //region asserts
+    private val checkUi = CheckButtonUi(
+        containerIdMatcher = containerIdMatcher,
+        containerClassTypeMatcher = containerClassTypeMatcher
+    )
+    //endregion
+
     fun assertInitialState() {
-        shuffledWordUi.assertTextVisible()
+        shuffleWord.assertTextVisible()
         inputUi.assertInitialState()
-        checkUi.assertVisibleDisabled()
         skipUi.assertVisible()
+        checkUi.assertVisibleDisabled()
         nextUi.assertNotVisible()
     }
 
@@ -60,18 +61,18 @@ class GamePage(word: String) {
     }
 
     fun assertInsufficientState() {
-        shuffledWordUi.assertTextVisible()
+        shuffleWord.assertTextVisible()
         inputUi.assertInsufficientState()
-        checkUi.assertVisibleDisabled()
         skipUi.assertVisible()
+        checkUi.assertVisibleDisabled()
         nextUi.assertNotVisible()
     }
 
     fun assertSufficientState() {
-        shuffledWordUi.assertTextVisible()
+        shuffleWord.assertTextVisible()
         inputUi.assertSufficientState()
-        checkUi.assertVisibleEnabled()
         skipUi.assertVisible()
+        checkUi.assertVisible()
         nextUi.assertNotVisible()
     }
 
@@ -80,10 +81,10 @@ class GamePage(word: String) {
     }
 
     fun assertCorrectState() {
-        shuffledWordUi.assertTextVisible()
+        shuffleWord.assertTextVisible()
         inputUi.assertCorrectState()
-        checkUi.assertNotVisible()
         skipUi.assertNotVisible()
+        checkUi.assertNotVisible()
         nextUi.assertVisible()
     }
 
@@ -96,15 +97,14 @@ class GamePage(word: String) {
     }
 
     fun assertIncorrectState() {
-        shuffledWordUi.assertTextVisible()
+        shuffleWord.assertTextVisible()
         inputUi.assertIncorrectState()
-        checkUi.assertVisibleDisabled()
         skipUi.assertVisible()
+        checkUi.assertVisibleDisabled()
         nextUi.assertNotVisible()
     }
 
     fun removeInputLastLetter() {
         inputUi.removeInputLastLetter()
     }
-    //endregion
 }
