@@ -33,18 +33,28 @@ class ScenarioTestUnscrambleGame {
     @Test
     fun caseNumber1() {
         gamePage.assertInitialState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertInitialState()
 
         gamePage.addInput(text = "fact")
+        gamePage.assertInsufficientState()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertInsufficientState()
 
         gamePage.addInput(text = "s")
         gamePage.assertSufficientState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertSufficientState()
 
         gamePage.clickCheck()
+        gamePage.assertCorrectState()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertCorrectState()
 
         gamePage.clickNext()
         gamePage = GamePage(word = "never".reversed())
+        gamePage.assertInitialState()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertInitialState()
     }
 
@@ -54,39 +64,61 @@ class ScenarioTestUnscrambleGame {
     @Test
     fun caseNumber2() {
         gamePage.assertInitialState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertInitialState()
 
         gamePage.clickSkip()
         gamePage = GamePage (word = "never".reversed())
         gamePage.assertInitialState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertInitialState()
 
         gamePage.addInput(text = "neve")
+        gamePage.assertInsufficientState()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertInsufficientState()
 
         gamePage.clickSkip()
         gamePage = GamePage (word = "entertain".reversed())
         gamePage.assertInitialState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertInitialState()
 
         gamePage.addInput(text = "entertai")
         gamePage.assertInsufficientState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertInsufficientState()
 
         gamePage.addInput(text = "n")
+        gamePage.assertSufficientState()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertSufficientState()
 
         gamePage.clickSkip()
         gamePage = GamePage (word = "alligator".reversed())
         gamePage.assertInitialState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertInitialState()
 
         gamePage.addInput(text = "alligato")
+        gamePage.assertInsufficientState()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertInsufficientState()
 
         gamePage.addInput(text = "h")
         gamePage.assertSufficientState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertSufficientState()
 
         gamePage.clickCheck()
+        gamePage.assertIncorrectState()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertIncorrectState()
 
         gamePage.clickSkip()
         gamePage = GamePage (word = "left".reversed())
+        gamePage.assertInitialState()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertInitialState()
         //11/
         gamePage.addInput(text = "lef")
@@ -95,19 +127,29 @@ class ScenarioTestUnscrambleGame {
         gamePage.assertSufficientState()
         gamePage.clickCheck()
         gamePage.assertIncorrectState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertIncorrectState()
 
         gamePage.removeInputLastLetter()
         gamePage.assertInsufficientState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertInsufficientState()
 
         gamePage.addInput(text = "t")
+        gamePage.assertSufficientState()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertSufficientState()
 
         gamePage.removeInputLastLetter()
         gamePage.assertInsufficientState()
         gamePage.addInput(text = "l")
         gamePage.assertSufficientState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertSufficientState()
 
         gamePage.clickCheck()
+        gamePage.assertIncorrectState()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertIncorrectState()
     }
 }
