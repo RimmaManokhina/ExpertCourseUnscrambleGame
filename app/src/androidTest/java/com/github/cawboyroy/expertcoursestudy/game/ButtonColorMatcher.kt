@@ -12,9 +12,10 @@ class ButtonColorMatcher(private val color: Int) :
         constructor(colorString: String) : this(Color.parseColor(colorString))
 
         override fun describeTo(description: Description) {
-            description.appendText("color for button doesn't match expected $color") }
+            description.appendText("color for button doesn't match expected $color")
+        }
 
     override fun matchesSafely(item: Button): Boolean {
-        return (item.background as ColorDrawable).color == color }
-
+        return (item.background as ColorDrawable).color == color
+    }
     }

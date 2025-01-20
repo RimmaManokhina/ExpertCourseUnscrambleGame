@@ -17,4 +17,4 @@ class TextInputLayoutHasErrorText(
     override fun matchesSafely(item: TextInputLayout): Boolean {
         return item.error == item.context.getString(errorResId)
     }
-}
+    }

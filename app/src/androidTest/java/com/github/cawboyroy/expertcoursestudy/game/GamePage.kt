@@ -2,57 +2,60 @@ package com.github.cawboyroy.expertcoursestudy.game
 
 import android.view.View
 import android.widget.LinearLayout
+
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
-import com.github.cawboyroy.expertcoursestudy.R
 import org.hamcrest.Matcher
+import com.github.cawboyroy.expertcoursestudy.R
 
 class GamePage(word: String) {
-
-    //region fields
+    
+//region fields
     private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.rootLayout))
     private val containerClassTypeMatcher: Matcher<View> =
         withParent(isAssignableFrom(LinearLayout::class.java))
 
-    private val shuffleWord = ShuffleWordUi(
+    private val shuffledWordUi = ShuffledWordUi(
         text = word,
         containerIdMatcher = containerIdMatcher,
-        containerClassTypeMatcher = containerClassTypeMatcher
-    )
+        containerClassTypeMatcher = containerClassTypeMatcher)
 
     private val inputUi = InputUi(
+        containerIdMatcher = containerIdMatcher,
+        containerClassTypeMatcher = containerClassTypeMatcher)
+
+    private val checkUi = CheckButtonUi(
+//        id = R.id.checkButton(),
+//        textResId = R.string.check,
+//        colorHex = "#E8B931",
         containerIdMatcher = containerIdMatcher,
         containerClassTypeMatcher = containerClassTypeMatcher
     )
 
     private val skipUi = ButtonUi(
         id = R.id.skipButton,
-        colorHex = "#E8B931",
         textResId = R.string.skip,
+        colorHex = "#E8B931",
         containerIdMatcher = containerIdMatcher,
         containerClassTypeMatcher = containerClassTypeMatcher
     )
 
     private val nextUi = ButtonUi(
         id = R.id.nextButton,
-        colorHex = "#57B05D",
         textResId = R.string.next,
+        colorHex = "#14AE5C",
         containerIdMatcher = containerIdMatcher,
         containerClassTypeMatcher = containerClassTypeMatcher
     )
+//endregion
 
-    private val checkUi = CheckButtonUi(
-        containerIdMatcher = containerIdMatcher,
-        containerClassTypeMatcher = containerClassTypeMatcher
-    )
-    //endregion
-
+    //region asserts
     fun assertInitialState() {
-        shuffleWord.assertTextVisible()
+        shuffledWordUi.assertTextVisible()
         inputUi.assertInitialState()
-        skipUi.assertVisible()
         checkUi.assertVisibleDisabled()
+        skipUi.assertVisible()
         nextUi.assertNotVisible()
     }
 
@@ -61,18 +64,18 @@ class GamePage(word: String) {
     }
 
     fun assertInsufficientState() {
-        shuffleWord.assertTextVisible()
+        shuffledWordUi.assertTextVisible()
         inputUi.assertInsufficientState()
-        skipUi.assertVisible()
         checkUi.assertVisibleDisabled()
+        skipUi.assertVisible()
         nextUi.assertNotVisible()
     }
 
-    fun assertSufficientState() {
-        shuffleWord.assertTextVisible()
+    fun asserSufficientState() {
+        shuffledWordUi.assertTextVisible()
         inputUi.assertSufficientState()
+        checkUi.assertVisibleEnabled()
         skipUi.assertVisible()
-        checkUi.assertVisible()
         nextUi.assertNotVisible()
     }
 
@@ -81,10 +84,10 @@ class GamePage(word: String) {
     }
 
     fun assertCorrectState() {
-        shuffleWord.assertTextVisible()
+        shuffledWordUi.assertTextVisible()
         inputUi.assertCorrectState()
-        skipUi.assertNotVisible()
         checkUi.assertNotVisible()
+        skipUi.assertNotVisible()
         nextUi.assertVisible()
     }
 
@@ -97,14 +100,15 @@ class GamePage(word: String) {
     }
 
     fun assertIncorrectState() {
-        shuffleWord.assertTextVisible()
+        shuffledWordUi.assertTextVisible()
         inputUi.assertIncorrectState()
-        skipUi.assertVisible()
         checkUi.assertVisibleDisabled()
+        skipUi.assertVisible()
         nextUi.assertNotVisible()
     }
 
     fun removeInputLastLetter() {
         inputUi.removeInputLastLetter()
     }
+    //endregion
 }

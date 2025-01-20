@@ -18,38 +18,40 @@ import org.hamcrest.Matcher
  * Properties
  * displayed
  */
+
 class ButtonUi(
     id: Int,
-    colorHex: String,
     @StringRes textResId: Int,
+    colorHex: String,
     containerIdMatcher: Matcher<View>,
     containerClassTypeMatcher: Matcher<View>
 ) : AbstractButtonUi(
     onView(
         allOf(
-            withId(id),
-            ButtonColorMatcher(colorHex),
-            withText(textResId),
             containerIdMatcher,
             containerClassTypeMatcher,
+            withId(id),
+            withText(textResId),
+            ButtonColorMatcher(colorHex),
             isAssignableFrom(AppCompatButton::class.java)
         )
     )
 )
 
 abstract class AbstractButtonUi(
-    protected val interaction: ViewInteraction
-) {
+    protected val interaction: ViewInteraction) {
 
     fun click() {
         interaction.perform(androidx.test.espresso.action.ViewActions.click())
     }
-
     fun assertVisible() {
-        interaction.check(matches(isDisplayed()))
+        interaction
+            .check(matches(isDisplayed()))
     }
 
     fun assertNotVisible() {
-        interaction.check(matches(not(isDisplayed())))
+        interaction
+            .check(matches(not(isDisplayed())))
     }
+
 }
