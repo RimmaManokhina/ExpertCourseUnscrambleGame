@@ -2,8 +2,9 @@ package com.github.cawboyroy.expertcoursestudy
 
 import android.view.View
 import com.github.cawboyroy.expertcoursestudy.databinding.ActivityMainBinding
+import java.io.Serializable
 
-interface GameUiState {
+interface GameUiState : Serializable {
 
     fun update(binding: ActivityMainBinding)
 

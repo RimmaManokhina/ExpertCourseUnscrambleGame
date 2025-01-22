@@ -72,7 +72,7 @@ class GamePage(word: String) {
         shuffleWord.assertTextVisible()
         inputUi.assertSufficientState()
         skipUi.assertVisible()
-        checkUi.assertVisible()
+        checkUi.assertVisibleEnabled()
         nextUi.assertNotVisible()
     }
 
