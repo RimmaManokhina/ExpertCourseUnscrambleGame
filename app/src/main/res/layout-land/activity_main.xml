@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -32,9 +33,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputEditText"
             android:layout_width="match_parent"
+
             android:layout_height="52dp"
             android:inputType="textCapWords"
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
@@ -73,5 +76,4 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="8dp" />
-
 </LinearLayout>

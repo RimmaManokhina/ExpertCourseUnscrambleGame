@@ -32,6 +32,7 @@ class ScenarioTestUnscrambleGame {
      */
     @Test
     fun caseNumber1() {
+
         scenarioRule.doWithRecreate { gamePage.assertInitialState() }
 
         gamePage.addInput(text = "fact")
@@ -53,6 +54,7 @@ class ScenarioTestUnscrambleGame {
      */
     @Test
     fun caseNumber2() {
+
         scenarioRule.doWithRecreate { gamePage.assertInitialState() }
 
         gamePage.clickSkip()
@@ -88,12 +90,15 @@ class ScenarioTestUnscrambleGame {
         gamePage.clickSkip()
         gamePage = GamePage (word = "left".reversed())
         scenarioRule.doWithRecreate { gamePage.assertInitialState() }
+
+        
         //11/
         gamePage.addInput(text = "lef")
         scenarioRule.doWithRecreate { gamePage.assertInsufficientState() }
         gamePage.addInput(text = "x")
         scenarioRule.doWithRecreate { gamePage.assertSufficientState() }
         gamePage.clickCheck()
+
         scenarioRule.doWithRecreate { gamePage.assertIncorrectState() }
 
         gamePage.removeInputLastLetter()
@@ -101,10 +106,11 @@ class ScenarioTestUnscrambleGame {
 
         gamePage.addInput(text = "t")
         scenarioRule.doWithRecreate { gamePage.assertSufficientState() }
-
+        
         gamePage.removeInputLastLetter()
         scenarioRule.doWithRecreate { gamePage.assertInsufficientState() }
         gamePage.addInput(text = "l")
+
         scenarioRule.doWithRecreate { gamePage.assertSufficientState() }
 
         gamePage.clickCheck()
@@ -114,6 +120,6 @@ class ScenarioTestUnscrambleGame {
     private fun ActivityScenarioRule<*>.doWithRecreate(block: () -> Unit) {
         block.invoke()
         scenario.recreate()
-        block.invoke()
+        block.invoke()       
     }
 }
