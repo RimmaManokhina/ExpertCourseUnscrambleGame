@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import com.github.cawboyroy.expertcoursestudy.databinding.ActivityMainBinding
 
-//@Suppress("DEPRECATION")
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var uiState: GameUiState
