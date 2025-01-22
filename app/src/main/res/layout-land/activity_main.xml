@@ -4,21 +4,19 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"/>
 
     <TextView
         android:id="@+id/shuffledWordTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:gravity="center"
         android:paddingVertical="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit..." />
@@ -26,24 +24,24 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"/>
 
-    <com.google.android.material.textfield.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputEditText"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="52dp"
+            android:inputType="textCapWords"
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             tools:text="Please, enter your answer"/>
 
     <Space
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
@@ -52,7 +50,6 @@
         android:id="@+id/checkButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
         android:background="@color/blue"
         android:text="@string/check" />
@@ -61,7 +58,6 @@
         android:id="@+id/skipButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
         android:background="@color/yellow"
         android:text="@string/skip"/>
