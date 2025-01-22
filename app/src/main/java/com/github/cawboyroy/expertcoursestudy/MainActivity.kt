@@ -16,6 +16,7 @@ import com.github.cawboyroy.expertcoursestudy.databinding.ActivityMainBinding
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
+
     private lateinit var uiState: GameUiState
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: GameViewModel
