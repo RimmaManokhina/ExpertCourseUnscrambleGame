@@ -3,14 +3,15 @@ package com.github.cawboyroy.expertcoursestudy
 interface GameRepository {
 
     fun shuffledWord(): String
-
     fun originalWord(): String
-
     fun next()
+    fun saveUserInput(value: String)
+    fun userInput(): String
 
     class Base(
+        private val index: IntCache,
+        private val userInput: StringCache,
         private val shuffleStrategy: ShuffleStrategy = ShuffleStrategy.Base(),
-
         private val originalList: List<String> = listOf(
             "facts",
             "never",
@@ -34,17 +35,26 @@ interface GameRepository {
 
         private val shuffledList = originalList.map { shuffleStrategy.shuffle(it) }
 
-        private var index = 0
+        override fun shuffledWord(): String = shuffledList[index.read()]
 
-        override fun shuffledWord(): String = shuffledList[index]
-
-        override fun originalWord(): String = originalList[index]
+        override fun originalWord(): String = originalList[index.read()]
 
         override fun next() {
-            if (index + 1 == originalList.size)
-                index = 0
+            val value = index.read()
+
+            if (value + 1 == originalList.size)
+                index.save(0)
             else
-                index++
+                index.save(value + 1)
+            userInput.save("")
+        }
+
+        override fun saveUserInput(value: String) {
+            userInput.save(value)
+        }
+
+        override fun userInput(): String {
+            return userInput.read()
         }
     }
 }

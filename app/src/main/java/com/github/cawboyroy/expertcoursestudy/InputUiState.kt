@@ -10,8 +10,7 @@ interface InputUiState : Serializable {
 
     abstract class Abstract(
         private val errorIsVisible: Boolean,
-        private val enabled: Boolean,
-        private val clearText: Boolean
+        private val enabled: Boolean
     ) : InputUiState {
 
         override fun update(inputLayout: TextInputLayout, inputEditText: TextInputEditText) {
@@ -19,14 +18,19 @@ interface InputUiState : Serializable {
             if (errorIsVisible)
                 inputLayout.error = inputLayout.context.getString(R.string.incorrect_message)
             inputLayout.isEnabled = enabled
-            if (clearText)
-                inputEditText.setText(R.string.empty)
         }
     }
 
-    object Initial : Abstract(false, true, true)
-    object Sufficient : Abstract(false, true, false)
-    object Insufficient : Abstract(false, true, false)
-    object Correct : Abstract(false, false, false)
-    object Incorrect : Abstract(true, true, false)
+    data class Initial(
+        private val userInput: String
+    ) : Abstract(false, true) {
+        override fun update(inputLayout: TextInputLayout, inputEditText: TextInputEditText) {
+            super.update(inputLayout, inputEditText)
+            inputEditText.setText(userInput)
+        }
+    }
+        object Sufficient : Abstract(false, true)
+        object Insufficient : Abstract(false, true)
+        object Correct : Abstract(false, false)
+        object Incorrect : Abstract(true, true)
 }
