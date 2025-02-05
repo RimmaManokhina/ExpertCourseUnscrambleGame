@@ -1,5 +1,7 @@
 package com.github.cawboyroy.expertcoursestudy
 
+import android.view.View
+
 class GameViewModel(
     private val repository: GameRepository
 ) {
@@ -9,14 +11,13 @@ class GameViewModel(
         return init()
     }
 
-    fun check(text: String): GameUiState {
-        val shuffledWord = repository.shuffledWord()
+    fun check(text: View): GameUiState {
         val originalWord = repository.originalWord()
         val isCorrect = originalWord.equals(text, ignoreCase = true)
         return if (isCorrect)
-            GameUiState.Correct(shuffledWord)
+            GameUiState.Correct
         else
-            GameUiState.Incorrect(shuffledWord)
+            GameUiState.Incorrect
     }
 
     fun skip(): GameUiState {
@@ -29,13 +30,16 @@ class GameViewModel(
         val shuffledWord = repository.shuffledWord()
         val isSufficient = text.length == shuffledWord.length
         return if (isSufficient)
-            GameUiState.Sufficient(shuffledWord)
+            GameUiState.Sufficient
         else
-            GameUiState.Insufficient(shuffledWord)
+            GameUiState.Insufficient
     }
 
-    fun init(): GameUiState {
-        val shuffledWord = repository.shuffledWord()
-        return GameUiState.Initial(shuffledWord, repository.userInput())
+    fun init(isFirstRun: Boolean = true): GameUiState {
+        if (isFirstRun) {
+            val shuffledWord = repository.shuffledWord()
+            return GameUiState.Initial(shuffledWord, repository.userInput())
+        } else
+            return GameUiState.Empty
     }
 }

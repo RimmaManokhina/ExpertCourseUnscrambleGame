@@ -1,8 +1,6 @@
-
 package com.github.cawboyroy.expertcoursestudy
 
-import android.annotation.SuppressLint
-import android.os.Build
+//import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,12 +8,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.widget.addTextChangedListener
 import com.github.cawboyroy.expertcoursestudy.databinding.ActivityMainBinding
 
-@Suppress("DEPRECATION")
-class MainActivity : AppCompatActivity() {
+//import androidx.core.widget.addTextChangedListener
 
+class MainActivity : AppCompatActivity() {
 
     private lateinit var uiState: GameUiState
     private lateinit var binding: ActivityMainBinding
@@ -28,11 +25,20 @@ class MainActivity : AppCompatActivity() {
 
         override fun afterTextChanged(s: Editable?) {
             uiState = viewModel.handleUserInput(text = s.toString())
-            uiState.update(binding = binding)
+            update.invoke()
         }
     }
 
-    @SuppressLint("SuspiciousIndentation")
+    private val update : () -> Unit = {
+        uiState.update(
+            binding.shuffledWordTextView,
+            binding.inputView,
+            binding.checkButton,
+            binding.skipButton,
+            binding.nextButton
+        )
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -48,53 +54,33 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = (application as UnscrambleApp).viewModel
 
-            binding.inputEditText.addTextChangedListener {
-            uiState = viewModel.handleUserInput(text = it.toString())
-            uiState.update(binding = binding)
-        }
-
         binding.checkButton.setOnClickListener {
-            uiState = viewModel.check(text = binding.inputEditText.text.toString())
-            uiState.update(binding = binding)
+            uiState = viewModel.check(text = binding.inputView)
+            update.invoke()
         }
 
         binding.skipButton.setOnClickListener {
             uiState = viewModel.skip()
-            uiState.update(binding = binding)
+            update.invoke()
         }
 
         binding.nextButton.setOnClickListener {
             uiState = viewModel.next()
-            uiState.update(binding = binding)
+            update.invoke()
         }
 
-        uiState = if (savedInstanceState == null)
-            viewModel.init()
-        else
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-            savedInstanceState.getSerializable(KEY, GameUiState::class.java) as GameUiState
-         else
-                savedInstanceState.getSerializable(KEY) as GameUiState
+        uiState = viewModel.init(savedInstanceState == null)
 
-        uiState.update(binding = binding)
+        update.invoke()
     }
 
     override fun onResume() {
         super.onResume()
-        binding.inputEditText.addTextChangedListener(textWatcher)
+        binding.inputView.addTextChangedListener(textWatcher)
     }
 
     override fun onPause() {
         super.onPause()
-        binding.inputEditText.removeTextChangedListener(textWatcher)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putSerializable(KEY, uiState)
-    }
-
-    companion object {
-        private const val KEY = "uiState"
+        binding.inputView.removeTextChangedListener(textWatcher)
     }
 }

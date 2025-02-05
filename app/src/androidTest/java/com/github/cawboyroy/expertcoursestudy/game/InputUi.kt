@@ -21,18 +21,13 @@ import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matcher
 
-class InputUi(
-    containerIdMatcher: Matcher<View>,
-    containerClassTypeMatcher: Matcher<View>
-) {
+class InputUi {
 
     private val inputLayoutId: Int = R.id.inputLayout
     private val layoutInteraction: ViewInteraction = onView(
         allOf(
             isAssignableFrom(TextInputLayout::class.java),
-            withId(inputLayoutId),
-            containerClassTypeMatcher,
-            containerIdMatcher
+            withId(inputLayoutId)
         )
     )
 
