@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <TextView
+    <com.github.cawboyroy.expertcoursestudy.views.shuffledWord.ShuffledWordTextView
         android:id="@+id/shuffledWordTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,19 +28,10 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayout"
+    <com.github.cawboyroy.expertcoursestudy.views.input.InputView
+        android:id="@+id/inputView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEditText"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-            tools:text="Please, enter your answer"/>
+        android:layout_height="wrap_content"/>
 
     <Space
         android:layout_width="match_parent"
@@ -48,7 +39,7 @@
         android:layout_weight="1" />
 
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.github.cawboyroy.expertcoursestudy.views.check.CheckButton
         android:id="@+id/checkButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,7 +48,7 @@
         android:background="@color/blue"
         android:text="@string/check" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.github.cawboyroy.expertcoursestudy.views.visiblebutton.VisibilityButton
         android:id="@+id/skipButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,10 +57,11 @@
         android:background="@color/yellow"
         android:text="@string/skip"/>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.github.cawboyroy.expertcoursestudy.views.visiblebutton.VisibilityButton
         android:id="@+id/nextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
         android:background="@color/green"
         android:text="@string/next"/>

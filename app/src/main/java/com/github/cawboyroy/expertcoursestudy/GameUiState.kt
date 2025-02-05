@@ -1,70 +1,98 @@
 package com.github.cawboyroy.expertcoursestudy
 
 import android.view.View
-import com.github.cawboyroy.expertcoursestudy.databinding.ActivityMainBinding
-import java.io.Serializable
+import com.github.cawboyroy.expertcoursestudy.views.check.UpdateCheckButton
+import com.github.cawboyroy.expertcoursestudy.views.shuffledWord.UpdateText
+import com.github.cawboyroy.expertcoursestudy.views.visiblebutton.UpdateVisibility
+import com.github.cawboyroy.expertcoursestudy.views.visiblebutton.VisibilityUiState
 
-interface GameUiState : Serializable {
+interface GameUiState {
 
-    fun update(binding: ActivityMainBinding)
+    fun update(
+        shuffledWordTextView: UpdateText,
+        inputView: View,
+        check: UpdateCheckButton,
+        skip: UpdateVisibility,
+        next: UpdateVisibility
+    )
 
-    abstract class Abstract(
-        private val shuffledValue: String,
-        private val inputUiState: InputUiState,
-        private val skipVisibility: Int,
-        private val checkUiState: CheckUiState,
-        private val nextVisibility: Int,
-    ) : GameUiState {
-
-        override fun update(binding: ActivityMainBinding) = with(binding) {
-            shuffledWordTextView.text = shuffledValue
-            inputUiState.update(inputLayout, inputEditText)
-            skipButton.visibility = skipVisibility
-            checkUiState.update(checkButton)
-            nextButton.visibility = nextVisibility
-        }
+    object Empty : GameUiState {
+        override fun update(
+            shuffledWordTextView: UpdateText,
+            inputView: View,
+            check: UpdateCheckButton,
+            skip: UpdateVisibility,
+            next: UpdateVisibility
+        ) = Unit
     }
 
-    data class Initial(
-        private val shuffledWord: String,
-        private val userInput: String = ""
-    ) : Abstract(
-        shuffledWord,
-        InputUiState.Initial(userInput),
-        skipVisibility = View.VISIBLE,
-        CheckUiState.Disabled,
-        nextVisibility = View.GONE
-    )
+    abstract class Abstract(
+            private val inputUiState: InputUiState,
+            private val checkUiState: CheckUiState
+        ) : GameUiState {
 
-    data class Insufficient(private val shuffledWord: String) : Abstract(
-        shuffledWord,
-        InputUiState.Insufficient,
-        skipVisibility = View.VISIBLE,
-        CheckUiState.Disabled,
-        nextVisibility = View.GONE
-    )
+            override fun update(
+                shuffledWordTextView: UpdateText,
+                inputView: View,
+                check: UpdateCheckButton,
+                skip: UpdateVisibility,
+                next: UpdateVisibility
+            ) {
+                inputView.updateUiState(inputUiState)
+                check.update(checkUiState)
+            }
+        }
 
-    data class Sufficient(private val shuffledWord: String) : Abstract(
-        shuffledWord,
-        InputUiState.Sufficient,
-        skipVisibility = View.VISIBLE,
-        CheckUiState.Enabled,
-        nextVisibility = View.GONE
-    )
+        data class Initial(
+            private val shuffledWord: String,
+            private val userInput: String = ""
+        ) : Abstract(
+            InputUiState.Initial(userInput),
+            CheckUiState.Invisible
+        ) {
+            override fun update(
+                shuffledWordTextView: UpdateText,
+                inputView: View,
+                check: UpdateCheckButton,
+                skip: UpdateVisibility,
+                next: UpdateVisibility
+            ) {
+                super.update(shuffledWordTextView, inputView, check, skip, next)
+                shuffledWordTextView.update(shuffledWord)
+                next.update(VisibilityUiState.Gone)
+                skip.update(VisibilityUiState.Visible)
+            }
+        }
 
-    data class Correct(private val shuffledWord: String) : Abstract(
-        shuffledWord,
-        InputUiState.Correct,
-        skipVisibility = View.GONE,
-        CheckUiState.Invisible,
-        nextVisibility = View.VISIBLE
-    )
+        object Insufficient : Abstract(
+            InputUiState.Insufficient,
+            CheckUiState.Disabled
+        )
 
-    data class Incorrect(private val shuffledWord: String) : Abstract(
-        shuffledWord,
-        InputUiState.Incorrect,
-        skipVisibility = View.VISIBLE,
-        CheckUiState.Disabled,
-        nextVisibility = View.GONE
-    )
-}
+        object Sufficient : Abstract(
+            InputUiState.Sufficient,
+            CheckUiState.Enabled
+        )
+
+        object Correct : Abstract(
+            InputUiState.Correct,
+            CheckUiState.Invisible
+        ) {
+            override fun update(
+                shuffledWordTextView: UpdateText,
+                inputView: View,
+                check: UpdateCheckButton,
+                skip: UpdateVisibility,
+                next: UpdateVisibility
+            ) {
+                super.update(shuffledWordTextView, inputView, check, skip, next)
+                next.update(VisibilityUiState.Visible)
+                skip.update(VisibilityUiState.Gone)
+            }
+        }
+
+        object Incorrect : Abstract(
+            InputUiState.Incorrect,
+            CheckUiState.Disabled
+        )
+    }

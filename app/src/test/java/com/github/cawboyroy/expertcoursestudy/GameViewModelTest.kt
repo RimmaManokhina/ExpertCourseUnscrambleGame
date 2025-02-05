@@ -25,15 +25,15 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "1")
-        expected = GameUiState.Insufficient(shuffledWord = "f1")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "1f")
-        expected = GameUiState.Sufficient(shuffledWord = "f1")
+        expected = GameUiState.Sufficient
         assertEquals(expected, actual)
 
         actual = viewModel.check(text = "1f")
-        expected = GameUiState.Correct(shuffledWord = "f1")
+        expected = GameUiState.Correct
         assertEquals(expected, actual)
 
         actual = viewModel.next()
@@ -63,7 +63,7 @@ class GameViewModelTest {
         click Skip
         state is 1 InitialState (another word)*/
         actual = viewModel.handleUserInput(text = "2")
-        expected = GameUiState.Insufficient(shuffledWord = "f2")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
@@ -77,11 +77,11 @@ class GameViewModelTest {
         6 click Skip
         state is 1 InitialState (another word)*/
         actual = viewModel.handleUserInput(text = "3")
-        expected = GameUiState.Insufficient(shuffledWord = "f3")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "3f")
-        expected = GameUiState.Sufficient(shuffledWord = "f3")
+        expected = GameUiState.Sufficient
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
@@ -97,15 +97,15 @@ class GameViewModelTest {
         10 click Skip
         state is 1 InitialState (another word)*/
         actual = viewModel.handleUserInput(text = "r")
-        expected = GameUiState.Insufficient(shuffledWord = "f4")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "r4")
-        expected = GameUiState.Sufficient(shuffledWord = "f4")
+        expected = GameUiState.Sufficient
         assertEquals(expected, actual)
 
         actual = viewModel.check(text = "4g")
-        expected = GameUiState.Incorrect(shuffledWord = "f4")
+        expected = GameUiState.Incorrect
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
@@ -129,31 +129,31 @@ class GameViewModelTest {
         18 input more letters
         state is Insufficient*/
         actual = viewModel.handleUserInput(text = "f")
-        expected = GameUiState.Insufficient(shuffledWord = "f5")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "6f")
-        expected = GameUiState.Sufficient(shuffledWord = "f5")
+        expected = GameUiState.Sufficient
         assertEquals(expected, actual)
 
         actual = viewModel.check(text = "6f")
-        expected = GameUiState.Incorrect(shuffledWord = "f5")
+        expected = GameUiState.Incorrect
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "6")
-        expected = GameUiState.Insufficient(shuffledWord = "f5")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "5f")
-        expected = GameUiState.Sufficient(shuffledWord = "f5")
+        expected = GameUiState.Sufficient
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "5")
-        expected = GameUiState.Insufficient(shuffledWord = "f5")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "5ff")
-        expected = GameUiState.Insufficient(shuffledWord = "f5")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
     }
 }

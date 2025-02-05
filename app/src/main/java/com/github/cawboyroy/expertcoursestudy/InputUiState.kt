@@ -1,32 +1,28 @@
 package com.github.cawboyroy.expertcoursestudy
 
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
+import com.github.cawboyroy.expertcoursestudy.views.input.UpdateInput
 import java.io.Serializable
 
 interface InputUiState : Serializable {
 
-    fun update(inputLayout: TextInputLayout, inputEditText: TextInputEditText)
+    fun update(updateInput: UpdateInput)
 
     abstract class Abstract(
         private val errorIsVisible: Boolean,
         private val enabled: Boolean
     ) : InputUiState {
 
-        override fun update(inputLayout: TextInputLayout, inputEditText: TextInputEditText) {
-            inputLayout.isErrorEnabled = errorIsVisible
-            if (errorIsVisible)
-                inputLayout.error = inputLayout.context.getString(R.string.incorrect_message)
-            inputLayout.isEnabled = enabled
+        override fun update(updateInput: UpdateInput) {
+            updateInput.updateErrorIsEnabledAndEnabled(errorIsVisible, enabled)
         }
     }
 
-    data class Initial(
-        private val userInput: String
+    data class Initial(private val userInput: String
     ) : Abstract(false, true) {
-        override fun update(inputLayout: TextInputLayout, inputEditText: TextInputEditText) {
-            super.update(inputLayout, inputEditText)
-            inputEditText.setText(userInput)
+
+        override fun update(updateInput: UpdateInput) {
+            super.update(updateInput)
+            updateInput.updateUserInput(userInput)
         }
     }
         object Sufficient : Abstract(false, true)
