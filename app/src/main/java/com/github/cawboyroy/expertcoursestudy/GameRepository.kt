@@ -17,19 +17,7 @@ interface GameRepository {
             "never",
             "entertain",
             "alligator",
-            "left",
-            "handle",
-            "panda",
-            "effort",
-            "January",
-            "extra",
-            "camera",
-            "plant",
-            "every",
-            "exit",
-            "spelling",
-            "hello",
-            "clever"
+            "left"
         )
     ) : GameRepository {
 
