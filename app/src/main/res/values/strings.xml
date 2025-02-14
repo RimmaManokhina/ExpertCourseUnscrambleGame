@@ -4,5 +4,7 @@
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="incorrect_message">Incorrect!</string>
-    <string name="empty" />
+    <string name="empty">Empty</string>
+    <string name="new_game">New Game</string>
+    <string name="stats_info">Game Over\\n\\nSkips: $skips\\nFails: $fails, \nCorrects: $corrects</string>
 </resources>
