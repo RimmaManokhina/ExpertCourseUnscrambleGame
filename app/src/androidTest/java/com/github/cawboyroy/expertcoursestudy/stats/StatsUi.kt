@@ -24,7 +24,7 @@ class StatsUi(
         allOf(
             withId(R.id.statsTextView),
             isAssignableFrom(TextView::class.java),
-            withText(R.string.stats_info)
+            withText("Game Over\n\nSkips: $skips\nFails: $fails\nCorrects: $corrects"),
         )
     )
 
