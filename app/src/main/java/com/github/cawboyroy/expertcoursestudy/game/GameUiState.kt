@@ -1,4 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy
+package com.github.cawboyroy.expertcoursestudy.game
 
 import android.view.View
 import com.github.cawboyroy.expertcoursestudy.views.check.UpdateCheckButton
@@ -27,8 +27,8 @@ interface GameUiState {
     }
 
     abstract class Abstract(
-            private val inputUiState: InputUiState,
-            private val checkUiState: CheckUiState
+        private val inputUiState: InputUiState,
+        private val checkUiState: CheckUiState
         ) : GameUiState {
 
             override fun update(

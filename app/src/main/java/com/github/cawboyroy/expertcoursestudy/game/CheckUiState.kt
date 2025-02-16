@@ -1,7 +1,6 @@
-package com.github.cawboyroy.expertcoursestudy
+package com.github.cawboyroy.expertcoursestudy.game
 
 import android.view.View
-import androidx.appcompat.widget.AppCompatButton
 import com.github.cawboyroy.expertcoursestudy.views.check.UpdateCheckButton
 import java.io.Serializable
 
