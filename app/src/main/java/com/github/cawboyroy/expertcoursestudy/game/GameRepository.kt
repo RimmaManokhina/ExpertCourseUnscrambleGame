@@ -1,4 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy
+package com.github.cawboyroy.expertcoursestudy.game
 
 interface GameRepository {
 

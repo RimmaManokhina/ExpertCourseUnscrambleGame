@@ -1,4 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy.views.stats
+package com.github.cawboyroy.expertcoursestudy.stats
 
 import android.content.Context
 import android.os.Parcelable

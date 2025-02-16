@@ -1,4 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy
+package com.github.cawboyroy.expertcoursestudy.game
 
 import com.github.cawboyroy.expertcoursestudy.views.input.UpdateInput
 import java.io.Serializable

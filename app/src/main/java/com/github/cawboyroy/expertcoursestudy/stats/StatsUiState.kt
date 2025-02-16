@@ -1,4 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy.views.stats
+package com.github.cawboyroy.expertcoursestudy.stats
 
 import java.io.Serializable
 

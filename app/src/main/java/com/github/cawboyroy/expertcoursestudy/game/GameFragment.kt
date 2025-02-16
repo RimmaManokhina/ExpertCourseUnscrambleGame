@@ -1,18 +1,13 @@
-package com.github.cawboyroy.expertcoursestudy
+package com.github.cawboyroy.expertcoursestudy.game
 
-//import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import com.github.cawboyroy.expertcoursestudy.UnscrambleApp
 import com.github.cawboyroy.expertcoursestudy.databinding.FragmentGameBinding
 
-//import androidx.core.widget.addTextChangedListener
-
-class MainActivity : AppCompatActivity() {
+class GameFragment : Fragment() {
 
     private lateinit var uiState: GameUiState
     private lateinit var binding: FragmentGameBinding
@@ -29,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private val update : () -> Unit = {
+    private val update: () -> Unit = {
         uiState.update(
             binding.shuffledWordTextView,
             binding.inputView,
@@ -41,21 +36,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
         binding = FragmentGameBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        requireActivity().setContentView(binding.root)//todo use onCreateView
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
-        viewModel = (application as UnscrambleApp).viewModel
+        viewModel = (requireActivity().application as UnscrambleApp).viewModel
 
         binding.checkButton.setOnClickListener {
-            uiState = viewModel.check(text = binding.inputView)
+            uiState = viewModel.check(text = binding.inputView.text())
             update.invoke()
         }
 

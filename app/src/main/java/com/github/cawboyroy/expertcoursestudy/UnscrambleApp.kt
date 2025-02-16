@@ -2,6 +2,11 @@ package com.github.cawboyroy.expertcoursestudy
 
 import android.app.Application
 import android.content.Context
+import com.github.cawboyroy.expertcoursestudy.game.GameRepository
+import com.github.cawboyroy.expertcoursestudy.game.GameViewModel
+import com.github.cawboyroy.expertcoursestudy.game.IntCache
+import com.github.cawboyroy.expertcoursestudy.game.ShuffleStrategy
+import com.github.cawboyroy.expertcoursestudy.game.StringCache
 
 class UnscrambleApp : Application() {
 
