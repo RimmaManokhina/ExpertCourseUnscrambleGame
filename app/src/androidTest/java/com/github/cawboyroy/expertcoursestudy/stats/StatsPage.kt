@@ -25,7 +25,7 @@ class StatsPage(skips: Int, fails: Int, corrects: Int) {
 
     private val newGameUi = ButtonUi(
         R.id.newGameButton,
-        "#E360CB",
+        "#F251D5",
         R.string.new_game,
         containerIdMatcher,
         containerClassTypeMatcher
@@ -39,3 +39,5 @@ class StatsPage(skips: Int, fails: Int, corrects: Int) {
         newGameUi.click()
     }
 }
+
+

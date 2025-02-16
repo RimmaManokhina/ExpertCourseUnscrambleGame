@@ -8,14 +8,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.github.cawboyroy.expertcoursestudy.databinding.ActivityMainBinding
+import com.github.cawboyroy.expertcoursestudy.databinding.FragmentGameBinding
 
 //import androidx.core.widget.addTextChangedListener
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var uiState: GameUiState
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: FragmentGameBinding
     private lateinit var viewModel: GameViewModel
 
     private val textWatcher = object : TextWatcher {
@@ -43,10 +43,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = FragmentGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.rootLayout) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
