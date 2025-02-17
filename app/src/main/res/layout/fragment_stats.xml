@@ -7,7 +7,7 @@
     android:layout_margin="16dp"
     android:padding="8dp">
 
-    <com.github.cawboyroy.expertcoursestudy.views.stats.StatsTextView
+    <com.github.cawboyroy.expertcoursestudy.stats.StatsTextView
         android:id="@+id/statsTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

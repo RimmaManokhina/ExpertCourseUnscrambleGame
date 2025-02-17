@@ -13,6 +13,10 @@ interface StatsUiState : Serializable {
     ) : StatsUiState {
 
         override fun show(statsTextView: UpdateStats) =
-            statsTextView.updateState(skips, fails, corrects)
+            statsTextView.update(skips, fails, corrects)
+    }
+
+    class Empty : StatsUiState {
+        override fun show(statsTextView: UpdateStats) = Unit
     }
 }

@@ -3,7 +3,6 @@ package com.github.cawboyroy.expertcoursestudy.stats
 import android.content.Context
 import android.os.Parcelable
 import android.util.AttributeSet
-
 import androidx.appcompat.widget.AppCompatTextView
 import com.github.cawboyroy.expertcoursestudy.R
 
