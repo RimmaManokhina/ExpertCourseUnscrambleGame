@@ -10,6 +10,7 @@ import com.github.cawboyroy.expertcoursestudy.game.StringCache
 
 class UnscrambleApp : Application() {
 
+    lateinit var statsViewModel: StatsViewModel
     lateinit var viewModel: GameViewModel
 
     override fun onCreate() {

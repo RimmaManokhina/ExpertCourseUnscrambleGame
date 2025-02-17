@@ -1,7 +1,9 @@
 package com.github.cawboyroy.expertcoursestudy.game
 
 import android.view.View
+import com.github.cawboyroy.expertcoursestudy.stats.NavigateToStats
 import com.github.cawboyroy.expertcoursestudy.views.check.UpdateCheckButton
+import com.github.cawboyroy.expertcoursestudy.views.input.UpdateInput
 import com.github.cawboyroy.expertcoursestudy.views.shuffledWord.UpdateText
 import com.github.cawboyroy.expertcoursestudy.views.visiblebutton.UpdateVisibility
 import com.github.cawboyroy.expertcoursestudy.views.visiblebutton.VisibilityUiState
@@ -14,17 +16,11 @@ interface GameUiState {
         check: UpdateCheckButton,
         skip: UpdateVisibility,
         next: UpdateVisibility
-    )
+    ) = Unit
 
-    object Empty : GameUiState {
-        override fun update(
-            shuffledWordTextView: UpdateText,
-            inputView: View,
-            check: UpdateCheckButton,
-            skip: UpdateVisibility,
-            next: UpdateVisibility
-        ) = Unit
-    }
+    fun navigate(navigateToStats: NavigateToStats) = Unit
+
+    object Empty : GameUiState
 
     abstract class Abstract(
         private val inputUiState: InputUiState,
@@ -33,7 +29,7 @@ interface GameUiState {
 
             override fun update(
                 shuffledWordTextView: UpdateText,
-                inputView: View,
+                inputView: UpdateInput,
                 check: UpdateCheckButton,
                 skip: UpdateVisibility,
                 next: UpdateVisibility

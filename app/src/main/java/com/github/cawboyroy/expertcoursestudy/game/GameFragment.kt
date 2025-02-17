@@ -3,14 +3,22 @@ package com.github.cawboyroy.expertcoursestudy.game
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.github.cawboyroy.expertcoursestudy.UnscrambleApp
 import com.github.cawboyroy.expertcoursestudy.databinding.FragmentGameBinding
+import com.github.cawboyroy.expertcoursestudy.stats.NavigateToStats
 
 class GameFragment : Fragment() {
 
+    private var _binding: FragmentGameBinding? = null
+
+    private val binding
+        get() = _binding!!
+
     private lateinit var uiState: GameUiState
-    private lateinit var binding: FragmentGameBinding
     private lateinit var viewModel: GameViewModel
 
     private val textWatcher = object : TextWatcher {
@@ -32,13 +40,20 @@ class GameFragment : Fragment() {
             binding.skipButton,
             binding.nextButton
         )
+        uiState.navigate(requireActivity() as NavigateToStats)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentGameBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        binding = FragmentGameBinding.inflate(layoutInflater)
-        requireActivity().setContentView(binding.root)//todo use onCreateView
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         viewModel = (requireActivity().application as UnscrambleApp).viewModel
 
@@ -70,5 +85,10 @@ class GameFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         binding.inputView.removeTextChangedListener(textWatcher)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
