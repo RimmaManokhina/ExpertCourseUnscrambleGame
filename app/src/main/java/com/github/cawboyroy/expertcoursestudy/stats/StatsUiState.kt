@@ -6,7 +6,7 @@ interface StatsUiState : Serializable {
 
     fun show(statsTextView: UpdateStats)
 
-    class Base (
+    data class Base (
         private val skips: Int,
         private val fails: Int,
         private val corrects: Int
@@ -16,7 +16,7 @@ interface StatsUiState : Serializable {
             statsTextView.update(skips, fails, corrects)
     }
 
-    class Empty : StatsUiState {
+    object Empty : StatsUiState {
         override fun show(statsTextView: UpdateStats) = Unit
     }
 }
