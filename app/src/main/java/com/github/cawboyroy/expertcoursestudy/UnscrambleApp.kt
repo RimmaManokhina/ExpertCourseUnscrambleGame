@@ -7,6 +7,7 @@ import com.github.cawboyroy.expertcoursestudy.game.GameViewModel
 import com.github.cawboyroy.expertcoursestudy.game.IntCache
 import com.github.cawboyroy.expertcoursestudy.game.ShuffleStrategy
 import com.github.cawboyroy.expertcoursestudy.game.StringCache
+import com.github.cawboyroy.expertcoursestudy.stats.StatsCache
 import com.github.cawboyroy.expertcoursestudy.stats.StatsViewModel
 
 class UnscrambleApp : Application() {
@@ -16,9 +17,12 @@ class UnscrambleApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        val sharedPreferences = getSharedPreferences(getString(R.string.app_name) + "Data", Context.MODE_PRIVATE)
+        val sharedPreferences =
+            getSharedPreferences(getString(R.string.app_name) + "Data", Context.MODE_PRIVATE)
+        val statsCache : StatsCache.All = StatsCache.Base(sharedPreferences)
         viewModel = GameViewModel(
             GameRepository.Base(
+                statsCache,
                 IntCache.Base(sharedPreferences, "indexKey", 0),
                 StringCache.Base(sharedPreferences,"userInputKey", ""),
                 ShuffleStrategy.Reverse()

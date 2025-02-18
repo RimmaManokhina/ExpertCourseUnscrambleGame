@@ -1,15 +1,19 @@
 package com.github.cawboyroy.expertcoursestudy.game
 
+import com.github.cawboyroy.expertcoursestudy.stats.StatsCache
+
 interface GameRepository {
 
     fun shuffledWord(): String
-    fun originalWord(): String
+    fun isCorrect(text: String): Boolean
     fun next()
+    fun skip()
     fun saveUserInput(value: String)
     fun userInput(): String
     fun isLastWord(): Boolean
 
     class Base(
+        private val statsCache: StatsCache.Game,
         private val index: IntCache,
         private val userInput: StringCache,
         private val shuffleStrategy: ShuffleStrategy = ShuffleStrategy.Base(),
@@ -26,12 +30,22 @@ interface GameRepository {
 
         override fun shuffledWord(): String = shuffledList[index.read()]
 
-        override fun originalWord(): String = originalList[index.read()]
+        override fun isCorrect(text: String): Boolean {
+            val isCorrect = originalList[index.read()].equals(text, ignoreCase = true)
+            if (isCorrect)
+                statsCache.incrementCorrects()
+            else statsCache.incrementFails()
+        return isCorrect}
 
         override fun next() {
             val value = index.read()
             index.save(value + 1)
             userInput.save("")
+        }
+
+        override fun skip() {
+            statsCache.incrementSkips()
+            next()
         }
 
         override fun saveUserInput(value: String) {

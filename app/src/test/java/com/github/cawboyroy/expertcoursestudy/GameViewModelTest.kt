@@ -226,11 +226,17 @@ private class FakeRepository(
 
     override fun shuffledWord(): String = shuffledList[index]
 
-    override fun originalWord(): String = originalList[index]
+    override fun isCorrect(text: String): Boolean {
+        return originalList[index].equals(text, ignoreCase = true)
+    }
 
     override fun next() {
         index++
         saveUserInput("")
+    }
+
+    override fun skip() {
+        next()
     }
 
     override fun isLastWord() : Boolean {
