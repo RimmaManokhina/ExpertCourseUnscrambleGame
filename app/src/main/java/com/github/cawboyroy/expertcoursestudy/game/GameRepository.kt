@@ -7,6 +7,7 @@ interface GameRepository {
     fun next()
     fun saveUserInput(value: String)
     fun userInput(): String
+    fun isLastWord(): Boolean
 
     class Base(
         private val index: IntCache,
@@ -29,11 +30,7 @@ interface GameRepository {
 
         override fun next() {
             val value = index.read()
-
-            if (value + 1 == originalList.size)
-                index.save(0)
-            else
-                index.save(value + 1)
+            index.save(value + 1)
             userInput.save("")
         }
 
@@ -43,6 +40,13 @@ interface GameRepository {
 
         override fun userInput(): String {
             return userInput.read()
+        }
+
+        override fun isLastWord(): Boolean {
+            val lastWord = index.read() == originalList.size
+            if (lastWord)
+                index.save(0)
+            return lastWord
         }
     }
 }

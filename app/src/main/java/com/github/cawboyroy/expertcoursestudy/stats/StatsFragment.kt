@@ -35,7 +35,7 @@ class StatsFragment : Fragment() {
             (requireActivity() as NavigateToGame).navigateToGame()
         }
 
-        val state: StatsUiState = viewModel.init(savedInstanceState == null)
+        val state: StatsUiState = viewModel.init(isFirstRun = savedInstanceState == null)
         state.show(binding.statsTextView)
     }
 

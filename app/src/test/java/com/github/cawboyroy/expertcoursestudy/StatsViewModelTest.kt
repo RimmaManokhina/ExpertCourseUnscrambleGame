@@ -1,6 +1,7 @@
 package com.github.cawboyroy.expertcoursestudy
 
 import com.github.cawboyroy.expertcoursestudy.stats.StatsUiState
+import com.github.cawboyroy.expertcoursestudy.stats.StatsViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

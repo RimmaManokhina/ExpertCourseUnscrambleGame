@@ -7,6 +7,7 @@ import com.github.cawboyroy.expertcoursestudy.game.GameViewModel
 import com.github.cawboyroy.expertcoursestudy.game.IntCache
 import com.github.cawboyroy.expertcoursestudy.game.ShuffleStrategy
 import com.github.cawboyroy.expertcoursestudy.game.StringCache
+import com.github.cawboyroy.expertcoursestudy.stats.StatsViewModel
 
 class UnscrambleApp : Application() {
 

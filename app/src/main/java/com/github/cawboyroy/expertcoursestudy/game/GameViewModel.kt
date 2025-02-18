@@ -34,10 +34,14 @@ class GameViewModel(
     }
 
     fun init(isFirstRun: Boolean = true): GameUiState {
-        if (isFirstRun) {
-            val shuffledWord = repository.shuffledWord()
-            return GameUiState.Initial(shuffledWord, repository.userInput())
+        return if (isFirstRun) {
+            if (repository.isLastWord())
+                GameUiState.GameOver
+            else {
+                val shuffledWord = repository.shuffledWord()
+                return GameUiState.Initial(shuffledWord, repository.userInput())
+            }
         } else
-            return GameUiState.Empty
+            GameUiState.Empty
     }
 }
