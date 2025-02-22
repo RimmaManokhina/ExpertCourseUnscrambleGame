@@ -1,6 +1,7 @@
-package com.github.cawboyroy.expertcoursestudy.game
+package com.github.cawboyroy.expertcoursestudy.game.data
 
-import com.github.cawboyroy.expertcoursestudy.stats.StatsCache
+import com.github.cawboyroy.expertcoursestudy.game.StringCache
+import com.github.cawboyroy.expertcoursestudy.stats.data.StatsCache
 
 interface GameRepository {
 

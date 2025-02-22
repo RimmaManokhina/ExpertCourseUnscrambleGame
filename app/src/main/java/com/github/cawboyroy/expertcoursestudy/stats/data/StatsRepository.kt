@@ -1,6 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy
-
-import com.github.cawboyroy.expertcoursestudy.stats.StatsCache
+package com.github.cawboyroy.expertcoursestudy.stats.data
 
 interface StatsRepository {
 

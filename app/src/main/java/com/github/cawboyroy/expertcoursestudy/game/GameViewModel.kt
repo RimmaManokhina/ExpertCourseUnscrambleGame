@@ -1,8 +1,13 @@
 package com.github.cawboyroy.expertcoursestudy.game
 
+import com.github.cawboyroy.expertcoursestudy.di.ClearViewModel
+import com.github.cawboyroy.expertcoursestudy.di.MyViewModel
+import com.github.cawboyroy.expertcoursestudy.game.data.GameRepository
+
 class GameViewModel(
-    private val repository: GameRepository
-) {
+    private val repository: GameRepository,
+    private val clearViewModel: ClearViewModel
+) : MyViewModel {
 
     fun next(): GameUiState {
         repository.next()
@@ -31,9 +36,10 @@ class GameViewModel(
 
     fun init(isFirstRun: Boolean = true): GameUiState {
         return if (isFirstRun) {
-            if (repository.isLastWord())
+            if (repository.isLastWord()) {
+                clearViewModel.clear(GameViewModel::class.java)
                 GameUiState.GameOver
-            else {
+            } else {
                 val shuffledWord = repository.shuffledWord()
                 return GameUiState.Initial(shuffledWord, repository.userInput())
             }

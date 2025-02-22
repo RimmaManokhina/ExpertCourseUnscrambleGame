@@ -28,10 +28,10 @@ class StatsTextView : AppCompatTextView, UpdateStats {
         override fun onRestoreInstanceState(state: Parcelable?) {
             val restoredState = state as StatsSavedState
             super.onRestoreInstanceState(restoredState.superState)
-            updateState(restoredState.restore())
+            update(restoredState.restore())
         }
 
-    override fun updateState(outer: StatsUiState) {
+    override fun update(outer: StatsUiState) {
         state = outer
         state.show(this)
     }
@@ -43,7 +43,7 @@ class StatsTextView : AppCompatTextView, UpdateStats {
 
     interface UpdateStats {
 
-        fun updateState(outer: StatsUiState)
+        fun update(outer: StatsUiState)
 
         fun update(skips: Int, fails: Int, corrects: Int)
     }

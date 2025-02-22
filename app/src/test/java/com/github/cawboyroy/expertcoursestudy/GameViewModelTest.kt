@@ -1,6 +1,6 @@
 package com.github.cawboyroy.expertcoursestudy
 
-import com.github.cawboyroy.expertcoursestudy.game.GameRepository
+import com.github.cawboyroy.expertcoursestudy.game.data.GameRepository
 import com.github.cawboyroy.expertcoursestudy.game.GameUiState
 import com.github.cawboyroy.expertcoursestudy.game.GameViewModel
 import org.junit.Assert.assertEquals
@@ -10,17 +10,19 @@ import org.junit.Test
 class GameViewModelTest {
 
     private lateinit var viewModel: GameViewModel
+    private lateinit var clearViewModel: FakeClearViewModel
 
     @Before
     fun setup() {
-        viewModel = GameViewModel(repository = FakeRepository())
+        clearViewModel = FakeClearViewModel()
+        viewModel = GameViewModel(
+            repository = FakeRepository(),
+            clearViewModel = clearViewModel)
     }
 
-    /**
-     * Unscramble game unit test
+    /**Unscramble game unit test
      * UGTC-01 happy pass
-     * Actual = viewModel,  expected= name of the State without "state" , what data should be used
-     */
+     * Actual = viewModel,  expected= name of the State without "state" , what data should be used*/
     @Test
     fun caseNumber1() {
         var actual: GameUiState = viewModel.init()
@@ -162,7 +164,9 @@ class GameViewModelTest {
 
     @Test
     fun testLastWordNext() {
-        viewModel = GameViewModel(repository = FakeRepository(listOf("one", "two")))
+        viewModel = GameViewModel(
+            repository = FakeRepository(listOf("one", "two")),
+            clearViewModel = clearViewModel        )
 
         var actual: GameUiState = viewModel.init(isFirstRun = true)
         var expected: GameUiState = GameUiState.Initial(shuffledWord = "one".reversed())
@@ -175,11 +179,16 @@ class GameViewModelTest {
         actual = viewModel.skip()
         expected = GameUiState.GameOver
         assertEquals(expected, actual)
+
+        assertEquals(GameViewModel::class.java, clearViewModel.clasz)
     }
 
     @Test
     fun testLastWordSkip() {
-        viewModel = GameViewModel(repository = FakeRepository(listOf("one", "two")))
+        viewModel = GameViewModel(
+            repository = FakeRepository(listOf("one", "two")),
+            clearViewModel = clearViewModel
+        )
 
         var actual: GameUiState = viewModel.init(isFirstRun = true)
         var expected: GameUiState = GameUiState.Initial(shuffledWord = "one".reversed())
@@ -208,6 +217,8 @@ class GameViewModelTest {
         actual = viewModel.next()
         expected = GameUiState.GameOver
         assertEquals(expected, actual)
+
+        assertEquals(GameViewModel::class.java, clearViewModel.clasz)
     }
 }
 
@@ -253,5 +264,3 @@ private class FakeRepository(
         return input
     }
 }
-
-

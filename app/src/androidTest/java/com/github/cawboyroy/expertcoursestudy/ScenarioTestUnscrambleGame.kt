@@ -35,7 +35,6 @@ class ScenarioTestUnscrambleGame {
     @Test
     fun caseNumber1() {
         //scenarioRule.doWithRecreate(gamePage::assertInitialState)
-
         scenarioRule.doWithRecreate { gamePage.assertInitialState() }
 
         gamePage.addInput(text = "fact")
@@ -94,7 +93,7 @@ class ScenarioTestUnscrambleGame {
         gamePage = GamePage (word = "left".reversed())
         scenarioRule.doWithRecreate { gamePage.assertInitialState() }
 
-        
+
         //11/
         gamePage.addInput(text = "lef")
         scenarioRule.doWithRecreate { gamePage.assertInsufficientState() }
@@ -109,7 +108,7 @@ class ScenarioTestUnscrambleGame {
 
         gamePage.addInput(text = "t")
         scenarioRule.doWithRecreate { gamePage.assertSufficientState() }
-        
+
         gamePage.removeInputLastLetter()
         scenarioRule.doWithRecreate { gamePage.assertInsufficientState() }
         gamePage.addInput(text = "l")
@@ -123,7 +122,6 @@ class ScenarioTestUnscrambleGame {
     /**
      * UGTC-03 fragment StatsScreen
      */
-
     @Test
     fun caseNumber3() {
         scenarioRule.doWithRecreate { gamePage.assertInitialState() }
@@ -202,6 +200,6 @@ class ScenarioTestUnscrambleGame {
     private fun ActivityScenarioRule<*>.doWithRecreate(block: () -> Unit) {
         block.invoke()
         scenario.recreate()
-        block.invoke()       
+        block.invoke()
     }
 }

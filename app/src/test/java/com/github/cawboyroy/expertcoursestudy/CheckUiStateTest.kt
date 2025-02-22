@@ -33,12 +33,12 @@ class CheckUiStateTest {
 
     @Test
     fun testInvisible() {
-        val enabled = CheckUiState.Invisible
+        val checkUiState = CheckUiState.Invisible
         val button = FakeButton()
 
-        enabled.update(button)
+        checkUiState.update(button)
 
-        assertEquals(View.VISIBLE, button.visibility)
+        assertEquals(View.GONE, button.visibility)
         assertEquals(false, button.enabled)
     }
 }

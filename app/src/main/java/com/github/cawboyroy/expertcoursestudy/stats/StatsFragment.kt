@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.github.cawboyroy.expertcoursestudy.UnscrambleApp
 import com.github.cawboyroy.expertcoursestudy.databinding.FragmentStatsBinding
+import com.github.cawboyroy.expertcoursestudy.di.ProvideViewModel
 import com.github.cawboyroy.expertcoursestudy.game.NavigateToGame
 
 class StatsFragment : Fragment() {
@@ -28,14 +28,15 @@ class StatsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val viewModel: StatsViewModel =
-            (requireActivity().application as UnscrambleApp).statsViewModel
+            (requireActivity() as ProvideViewModel).makeViewModel(StatsViewModel::class.java)
 
         binding.newGameButton.setOnClickListener {
+            viewModel.clear()
             (requireActivity() as NavigateToGame).navigateToGame()
         }
 
         val state: StatsUiState = viewModel.init(isFirstRun = savedInstanceState == null)
-        state.show(binding.statsTextView)
+        binding.statsTextView.update(state)
     }
 
     override fun onDestroyView() {

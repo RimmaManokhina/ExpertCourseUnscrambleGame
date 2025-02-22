@@ -1,7 +1,7 @@
-package com.github.cawboyroy.expertcoursestudy.stats
+package com.github.cawboyroy.expertcoursestudy.stats.data
 
 import android.content.SharedPreferences
-import com.github.cawboyroy.expertcoursestudy.game.IntCache
+import com.github.cawboyroy.expertcoursestudy.game.data.IntCache
 
 interface StatsCache {
 
