@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.github.cawboyroy.expertcoursestudy.UnscrambleApp
 import com.github.cawboyroy.expertcoursestudy.databinding.FragmentGameBinding
+import com.github.cawboyroy.expertcoursestudy.di.ProvideViewModel
 import com.github.cawboyroy.expertcoursestudy.stats.NavigateToStats
 
 class GameFragment : Fragment() {
@@ -32,7 +32,7 @@ class GameFragment : Fragment() {
         }
     }
 
-    private val update: () -> Unit = {
+    val update: () -> Unit = {
         uiState.update(
             binding.shuffledWordTextView,
             binding.inputView,
@@ -55,7 +55,10 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = (requireActivity().application as UnscrambleApp).viewModel
+        val viewModel: GameViewModel =
+            (requireActivity() as ProvideViewModel).makeViewModel(GameViewModel::class.java)
+
+        lateinit var uiState: GameUiState
 
         binding.checkButton.setOnClickListener {
             uiState = viewModel.check(text = binding.inputView.text())

@@ -12,7 +12,7 @@ interface GameUiState {
 
     fun update(
         shuffledWordTextView: UpdateText,
-        inputView: View,
+        inputView: UpdateInput,
         check: UpdateCheckButton,
         skip: UpdateVisibility,
         next: UpdateVisibility
@@ -48,7 +48,7 @@ interface GameUiState {
         ) {
             override fun update(
                 shuffledWordTextView: UpdateText,
-                inputView: View,
+                inputView: UpdateInput,
                 check: UpdateCheckButton,
                 skip: UpdateVisibility,
                 next: UpdateVisibility
@@ -76,7 +76,7 @@ interface GameUiState {
         ) {
             override fun update(
                 shuffledWordTextView: UpdateText,
-                inputView: View,
+                inputView: UpdateInput,
                 check: UpdateCheckButton,
                 skip: UpdateVisibility,
                 next: UpdateVisibility
@@ -96,5 +96,4 @@ interface GameUiState {
         override fun navigate(navigateToStats: NavigateToStats) =
             navigateToStats.navigateToStats()
         }
-    }
 }

@@ -1,5 +1,6 @@
 package com.github.cawboyroy.expertcoursestudy
 
+import com.github.cawboyroy.expertcoursestudy.stats.data.StatsRepository
 import com.github.cawboyroy.expertcoursestudy.stats.StatsUiState
 import com.github.cawboyroy.expertcoursestudy.stats.StatsViewModel
 import org.junit.Assert.assertEquals
@@ -10,7 +11,11 @@ class StatsViewModelTest {
     @Test
     fun test() {
         val repository = FakeStatsRepository()
-        val viewModel: StatsViewModel = StatsViewModel(repository = repository)
+        val clearViewModel = FakeClearViewModel()
+        val viewModel: StatsViewModel = StatsViewModel(
+            repository = repository,
+            clearViewModel = clearViewModel
+        )
 
         var actualUiState: StatsUiState = viewModel.init(isFirstRun = true)
         assertEquals(StatsUiState.Base(1, 2, 3), actualUiState)
@@ -18,7 +23,10 @@ class StatsViewModelTest {
 
         actualUiState = StatsUiState.Empty
         assertEquals(StatsUiState.Empty, actualUiState)
-    }
+
+        viewModel.clear()
+        assertEquals(StatsViewModel::class.java, clearViewModel.clasz)
+        }
 }
 
 private class FakeStatsRepository : StatsRepository {
