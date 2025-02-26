@@ -1,5 +1,8 @@
 package com.github.cawboyroy.expertcoursestudy
 
+import com.github.cawboyroy.expertcoursestudy.game.data.GameRepository
+import com.github.cawboyroy.expertcoursestudy.game.GameUiState
+import com.github.cawboyroy.expertcoursestudy.game.GameViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -7,17 +10,19 @@ import org.junit.Test
 class GameViewModelTest {
 
     private lateinit var viewModel: GameViewModel
+    private lateinit var clearViewModel: FakeClearViewModel
 
     @Before
     fun setup() {
-        viewModel = GameViewModel(repository = FakeRepository())
+        clearViewModel = FakeClearViewModel()
+        viewModel = GameViewModel(
+            repository = FakeRepository(),
+            clearViewModel = clearViewModel)
     }
 
-    /**
-     * Unscramble game unit test
+    /**Unscramble game unit test
      * UGTC-01 happy pass
-     * Actual = viewModel,  expected= name of the State without "state" , what data should be used
-     */
+     * Actual = viewModel,  expected= name of the State without "state" , what data should be used*/
     @Test
     fun caseNumber1() {
         var actual: GameUiState = viewModel.init()
@@ -25,15 +30,15 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "1")
-        expected = GameUiState.Insufficient(shuffledWord = "f1")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "1f")
-        expected = GameUiState.Sufficient(shuffledWord = "f1")
+        expected = GameUiState.Sufficient
         assertEquals(expected, actual)
 
         actual = viewModel.check(text = "1f")
-        expected = GameUiState.Correct(shuffledWord = "f1")
+        expected = GameUiState.Correct
         assertEquals(expected, actual)
 
         actual = viewModel.next()
@@ -63,7 +68,7 @@ class GameViewModelTest {
         click Skip
         state is 1 InitialState (another word)*/
         actual = viewModel.handleUserInput(text = "2")
-        expected = GameUiState.Insufficient(shuffledWord = "f2")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
@@ -77,11 +82,11 @@ class GameViewModelTest {
         6 click Skip
         state is 1 InitialState (another word)*/
         actual = viewModel.handleUserInput(text = "3")
-        expected = GameUiState.Insufficient(shuffledWord = "f3")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "3f")
-        expected = GameUiState.Sufficient(shuffledWord = "f3")
+        expected = GameUiState.Sufficient
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
@@ -97,15 +102,15 @@ class GameViewModelTest {
         10 click Skip
         state is 1 InitialState (another word)*/
         actual = viewModel.handleUserInput(text = "r")
-        expected = GameUiState.Insufficient(shuffledWord = "f4")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "r4")
-        expected = GameUiState.Sufficient(shuffledWord = "f4")
+        expected = GameUiState.Sufficient
         assertEquals(expected, actual)
 
         actual = viewModel.check(text = "4g")
-        expected = GameUiState.Incorrect(shuffledWord = "f4")
+        expected = GameUiState.Incorrect
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
@@ -129,41 +134,102 @@ class GameViewModelTest {
         18 input more letters
         state is Insufficient*/
         actual = viewModel.handleUserInput(text = "f")
-        expected = GameUiState.Insufficient(shuffledWord = "f5")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "6f")
-        expected = GameUiState.Sufficient(shuffledWord = "f5")
+        expected = GameUiState.Sufficient
         assertEquals(expected, actual)
 
         actual = viewModel.check(text = "6f")
-        expected = GameUiState.Incorrect(shuffledWord = "f5")
+        expected = GameUiState.Incorrect
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "6")
-        expected = GameUiState.Insufficient(shuffledWord = "f5")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "5f")
-        expected = GameUiState.Sufficient(shuffledWord = "f5")
+        expected = GameUiState.Sufficient
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "5")
-        expected = GameUiState.Insufficient(shuffledWord = "f5")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "5ff")
-        expected = GameUiState.Insufficient(shuffledWord = "f5")
+        expected = GameUiState.Insufficient
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun testLastWordNext() {
+        viewModel = GameViewModel(
+            repository = FakeRepository(listOf("one", "two")),
+            clearViewModel = clearViewModel        )
+
+        var actual: GameUiState = viewModel.init(isFirstRun = true)
+        var expected: GameUiState = GameUiState.Initial(shuffledWord = "one".reversed())
+        assertEquals(expected, actual)
+
+        actual = viewModel.skip()
+        expected = GameUiState.Initial(shuffledWord = "two".reversed())
+        assertEquals(expected, actual)
+
+        actual = viewModel.skip()
+        expected = GameUiState.GameOver
+        assertEquals(expected, actual)
+
+        assertEquals(GameViewModel::class.java, clearViewModel.clasz)
+    }
+
+    @Test
+    fun testLastWordSkip() {
+        viewModel = GameViewModel(
+            repository = FakeRepository(listOf("one", "two")),
+            clearViewModel = clearViewModel
+        )
+
+        var actual: GameUiState = viewModel.init(isFirstRun = true)
+        var expected: GameUiState = GameUiState.Initial(shuffledWord = "one".reversed())
+        assertEquals(expected, actual)
+
+        actual = viewModel.handleUserInput(text = "one")
+        expected = GameUiState.Sufficient
+        assertEquals(expected, actual)
+
+        actual = viewModel.check(text = "one")
+        expected = GameUiState.Correct
+        assertEquals(expected, actual)
+
+        actual = viewModel.next()
+        expected = GameUiState.Initial(shuffledWord = "two".reversed())
+        assertEquals(expected, actual)
+
+        actual = viewModel.handleUserInput(text = "two")
+        expected = GameUiState.Sufficient
+        assertEquals(expected, actual)
+
+        actual = viewModel.check(text = "two")
+        expected = GameUiState.Correct
+        assertEquals(expected, actual)
+
+        actual = viewModel.next()
+        expected = GameUiState.GameOver
+        assertEquals(expected, actual)
+
+        assertEquals(GameViewModel::class.java, clearViewModel.clasz)
+    }
 }
+
 
 /** GameRepository - интерфейс
  * class FakeRepository имплементирует интерфейс, поэтому Override fun
  */
-private class FakeRepository : GameRepository {
+private class FakeRepository(
 
-    private val originalList = listOf("1f", "2f", "3f", "4f","5f")
+    private val originalList: List<String> = listOf("1f", "2f", "3f", "4f","5f")
+) : GameRepository {
 
     private val shuffledList = originalList.map {it.reversed()}
 
@@ -171,11 +237,30 @@ private class FakeRepository : GameRepository {
 
     override fun shuffledWord(): String = shuffledList[index]
 
-    override fun originalWord(): String = originalList[index]
+    override fun isCorrect(text: String): Boolean {
+        return originalList[index].equals(text, ignoreCase = true)
+    }
 
     override fun next() {
         index++
-        if (index == originalList.size)
-            index = 0
+        saveUserInput("")
+    }
+
+    override fun skip() {
+        next()
+    }
+
+    override fun isLastWord() : Boolean {
+        return index == originalList.size
+    }
+
+    private var input: String = ""
+
+    override fun saveUserInput(value: String) {
+        input = value
+    }
+
+    override fun userInput(): String {
+        return input
     }
 }
