@@ -11,6 +11,7 @@ import com.github.cawboyroy.expertcoursestudy.databinding.FragmentGameBinding
 import com.github.cawboyroy.expertcoursestudy.di.ProvideViewModel
 import com.github.cawboyroy.expertcoursestudy.stats.NavigateToStats
 
+@Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
 class GameFragment : Fragment() {
 
     private var _binding: FragmentGameBinding? = null

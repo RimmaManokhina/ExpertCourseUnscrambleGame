@@ -56,7 +56,6 @@ class ScenarioTestUnscrambleGame {
      */
     @Test
     fun caseNumber2() {
-
         scenarioRule.doWithRecreate { gamePage.assertInitialState() }
 
         gamePage.clickSkip()
@@ -195,6 +194,27 @@ class ScenarioTestUnscrambleGame {
 
         setup()
         scenarioRule.doWithRecreate { gamePage.assertInitialState() }
+    }
+
+    /** UGTC-04 LoadScreen*/
+    @Test
+    fun caseNumber4() {
+        val loadPage = LoadPage()
+
+        loadPage.assertErrorState()
+        scenarioRule.scenario.recreate()
+        loadPage.assertErrorState()
+
+        loadPage.clickRetry()
+
+        loadPage.assertProgressState()
+        loadPage.assertErrorState()
+        loadPage.assertProgressState()
+
+        loadPage.waitTillGone()
+
+        scenarioRule.doWithRecreate { gamePage.assertInitialState() }
+
     }
 
     private fun ActivityScenarioRule<*>.doWithRecreate(block: () -> Unit) {
