@@ -201,6 +201,12 @@ class ScenarioTestUnscrambleGame {
     fun caseNumber4() {
         val loadPage = LoadPage()
 
+        loadPage.assertProgressState()
+        loadPage.assertErrorState()
+        loadPage.assertProgressState()
+
+        loadPage.waitTillError()
+
         loadPage.assertErrorState()
         scenarioRule.scenario.recreate()
         loadPage.assertErrorState()
