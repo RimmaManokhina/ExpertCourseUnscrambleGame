@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.github.cawboyroy.expertcoursestudy.databinding.FragmentLoadBinding
 import com.github.cawboyroy.expertcoursestudy.di.ProvideViewModel
 import com.github.cawboyroy.expertcoursestudy.game.GameUiState
-import com.github.cawboyroy.expertcoursestudy.stats.NavigateToStats
+import com.github.cawboyroy.expertcoursestudy.game.NavigateToGame
 
 class LoadFragment: Fragment() {
 
@@ -33,13 +33,13 @@ class LoadFragment: Fragment() {
         }
     }
 
-    private val update: (LoadUiState) -> Unit = {
+    private val update: (LoadUiState) -> Unit = { uiState ->
         uiState.show(
             binding.errorTextView,
             binding.retryButton,
             binding.progressBar
         )
-        uiState.navigate(requireActivity() as NavigateToStats)
+        uiState.navigate((requireActivity() as NavigateToGame))
     }
 
     override fun onCreateView(
@@ -60,7 +60,7 @@ class LoadFragment: Fragment() {
             viewModel.load()
         }
 
-            viewModel.load(firstRun = savedInstanceState == null)
+            viewModel.load(isFirstRun = savedInstanceState == null)
     }
 
     override fun onResume() {

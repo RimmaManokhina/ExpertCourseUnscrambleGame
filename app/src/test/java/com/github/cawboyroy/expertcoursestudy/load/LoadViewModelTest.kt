@@ -25,13 +25,13 @@ class LoadViewModelTest {
         viewModel.startUpdates(observer = fragment) // onResume
         assertEquals(1, observable.registerCalledCount)
 
-        assertEquals(LoadUiState.Progress, fragment.stateList.first()) // give cashed progress ui state to fragment
+        assertEquals(LoadUiState.Progress, fragment.statesList.first()) // give cashed progress ui state to fragment
         assertEquals(1, fragment.statesList.size)
 
         repository.returnResult() // get data from server
         assertEquals(LoadUiState.Success, observable.postUiStateCalledList[1])
         assertEquals(2, observable.postUiStateCalledList.size)
-        assertEquals(LoadUiState.Success, fragment,stateList[1])
+        assertEquals(LoadUiState.Success, fragment.statesList[1])
         assertEquals(2, fragment.statesList.size)
     }
 
@@ -54,7 +54,7 @@ class LoadViewModelTest {
         viewModel.startUpdates(observer = fragment) // onResume
         assertEquals(1, observable.registerCalledCount)
 
-        assertEquals(LoadUiState.Progress, fragment.stateList.first()) // give cashed progress ui state to fragment
+        assertEquals(LoadUiState.Progress, fragment.statesList.first()) // give cashed progress ui state to fragment
         assertEquals(1, fragment.statesList.size)
 
         viewModel.stopUpdates() // onPause and activity death (aka onStop, onDestroy)
@@ -94,53 +94,54 @@ private class FakeLoadRepository : LoadRepository {
     private var loadResult: LoadResult? = null
     private var loadResultCalledBack: (LoadResult) -> Unit = {}
 
-    fun expectedResult(loadResult: LoadResult) {
+    fun expectResult(loadResult: LoadResult) {
         this.loadResult = loadResult
     }
 
     var loadCalledCount = 0
+
     override fun load(resultCallBack: (LoadResult) -> Unit) {
         loadCalledCount++
         loadResultCallBack = resultCallBack
     }
 
     fun returnResult() {
-        loadResultCalledBack.invoke(loadResult)
+        loadResultCalledBack.invoke(loadResult!!)
     }
 }
 
-private class FakeUiObservable: UiObservable {
+    private class FakeUiObservable : UiObservable {
 
-    private var uiStateCached: LoadUiState? = null
-    private var observerCached: ((LoadUiState) -> Unit)? = null
+        private var uiStateCached: LoadUiState? = null
+        private var observerCached: ((LoadUiState) -> Unit)? = null
 
-    var registerCalledCount = 0
+        var registerCalledCount = 0
 
-    override fun register(observer: (LoadUiState) -> Unit) {
-        registerCalledCount++
-        observerCached = observer
-        if (uiStateCached != null) {
-            observerCached!!.invoke(uiStateCached)
-            uiStateCached = null
+        override fun register(observer: (LoadUiState) -> Unit) {
+            registerCalledCount++
+            observerCached = observer
+            if (uiStateCached != null) {
+                observerCached!!.invoke(uiStateCached!!)
+                uiStateCached = null
+            }
+        }
+
+        var unregisterCalledCount = 0
+
+        override fun unregister() {
+            unregisterCalledCount++
+            observerCached = null
+        }
+
+        val postUiStateCalledList = mutableListOf<LoadUiState>()
+
+        override fun postUiState(uiState: LoadUiState) {
+            postUiStateCalledList.add(uiState)
+            if (observerCached == null) {
+                uiStateCached = uiState
+            } else {
+                observerCached!!.invoke(uiState)
+                uiStateCached = null
+            }
         }
     }
-
-    var unregisterCalledCount = 0
-
-    override fun unregister() {
-        unregisterCalledCount++
-        observerCached = null
-    }
-
-    val postUiStateCalledList = mutableListOf<LoadUiState>()
-
-    override fun postUiState(uiState: LoadUiState) {
-        postUiStateCalledList.add(uiState)
-        if (observerCached == null) {
-            uiStateCached = uiState
-        } else {
-            observerCached!!.invoke(uiState)
-            uiStateCached = null
-        }
-    }
-}
