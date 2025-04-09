@@ -1,7 +1,9 @@
 package com.github.cawboyroy.expertcoursestudy
 
+import com.github.cawboyroy.expertcoursestudy.core.MyViewModel
 import com.github.cawboyroy.expertcoursestudy.di.ClearViewModel
-import com.github.cawboyroy.expertcoursestudy.di.MyViewModel
+import junit.framework.TestCase.assertEquals
+
 
 class FakeClearViewModel : ClearViewModel {
 
@@ -9,6 +11,10 @@ class FakeClearViewModel : ClearViewModel {
 
     override fun clear(viewModelClass: Class<out MyViewModel>) {
         clasz = viewModelClass
+    }
+
+    fun assertClearCalled(expected: Class<out MyViewModel>) {
+        assertEquals(expected, clasz)
     }
 }
 

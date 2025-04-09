@@ -9,4 +9,5 @@
     <string name="stats_info">Game Over\n\nSkips: %d\nFails: %d\nCorrects: %d</string>
     <string name="retry">Retry</string>
     <string name="no_internet_connection">No internet connection</string>
+    <string name="service_unavailable">Service is unavailable</string>
 </resources>

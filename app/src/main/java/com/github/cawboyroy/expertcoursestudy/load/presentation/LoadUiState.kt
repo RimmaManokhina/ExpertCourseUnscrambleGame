@@ -1,4 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy.load
+package com.github.cawboyroy.expertcoursestudy.load.presentation
 
 import com.github.cawboyroy.expertcoursestudy.R
 import com.github.cawboyroy.expertcoursestudy.game.NavigateToGame
@@ -14,6 +14,8 @@ interface LoadUiState {
         retryButton: UpdateVisibility,
         progressBar: UpdateVisibility
     )
+
+    fun navigate(navigateToGame: NavigateToGame) = Unit
 
     abstract class Abstract(
         private val errorUiState: ErrorUiState,
@@ -31,8 +33,6 @@ interface LoadUiState {
         }
     }
 
-    fun navigate(navigateToGame: NavigateToGame) = Unit
-
     object Progress : Abstract (
         ErrorUiState.Hide,
         VisibilityUiState.Gone,
@@ -49,7 +49,7 @@ interface LoadUiState {
     }
 
     data class Error(private val message: String
-    ) : Abstract( // todo handle message String and ResId same time
+    ) : Abstract(
         ErrorUiState.Show(R.string.no_internet_connection),
         VisibilityUiState.Visible,
         VisibilityUiState.Gone)

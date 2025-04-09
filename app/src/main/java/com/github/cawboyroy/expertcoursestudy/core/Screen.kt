@@ -1,4 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy.main
+package com.github.cawboyroy.expertcoursestudy.core
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -15,6 +15,16 @@ interface Screen {
                 .commit()
         }
 
-        protected open fun newFragment() : Fragment = fragmentClass.getDeclaredConstructor().newInstance()
+        protected open fun newFragment(): Fragment =
+            fragmentClass.getDeclaredConstructor().newInstance()
+    }
+
+    object Empty : Screen {
+
+        override fun show(
+            containerId: Int,
+            fragmentManager: FragmentManager
+        ) = Unit
+
     }
 }

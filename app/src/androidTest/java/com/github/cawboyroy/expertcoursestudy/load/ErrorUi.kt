@@ -33,6 +33,4 @@ class ErrorUi(
     override fun assertTillVisible() {}
 
     override fun waitTillDoesNotExist() {}
-
 }
-
