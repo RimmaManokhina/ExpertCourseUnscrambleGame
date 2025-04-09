@@ -1,10 +1,10 @@
-package com.github.cawboyroy.expertcoursestudy.game.data
+package com.github.cawboyroy.expertcoursestudy.game
 
 import android.content.SharedPreferences
 
 interface IntCache {
 
-    fun read() : Int
+    fun read(): Int
 
     fun save(value: Int)
 
