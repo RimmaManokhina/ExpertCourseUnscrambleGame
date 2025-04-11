@@ -1,15 +1,21 @@
 package com.github.cawboyroy.expertcoursestudy.main
 
+import com.github.cawboyroy.expertcoursestudy.core.Screen
 import com.github.cawboyroy.expertcoursestudy.game.GameScreen
 import com.github.cawboyroy.expertcoursestudy.game.NavigateToGame
+import com.github.cawboyroy.expertcoursestudy.load.LoadScreen
+import com.github.cawboyroy.expertcoursestudy.load.presentation.NavigateToLoad
 import com.github.cawboyroy.expertcoursestudy.stats.NavigateToStats
 import com.github.cawboyroy.expertcoursestudy.stats.StatsScreen
 
-interface Navigation : NavigateToGame, NavigateToStats {
+interface Navigation : NavigateToGame, NavigateToStats, NavigateToLoad {
 
     fun navigate(screen: Screen)
 
     override fun navigateToGame() = navigate(GameScreen)
 
     override fun navigateToStats() = navigate(StatsScreen)
+
+    override fun navigateToLoad() = navigate(LoadScreen)
+
 }

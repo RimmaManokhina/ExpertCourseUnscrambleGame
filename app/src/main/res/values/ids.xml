@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="progressBar" type="id">Progress Bar</item>
+    <item name="errorTextView" type="id">Error TextView</item>
+    <item name="loadContainer" type="id">Load Container</item>
+    <item name="retryButton" type="id">Retry Button</item>
+</resources>

@@ -3,6 +3,7 @@ package com.github.cawboyroy.expertcoursestudy
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.github.cawboyroy.expertcoursestudy.game.GamePage
+import com.github.cawboyroy.expertcoursestudy.load.LoadPage
 import com.github.cawboyroy.expertcoursestudy.main.MainActivity
 import com.github.cawboyroy.expertcoursestudy.stats.StatsPage
 import org.junit.Before
@@ -35,7 +36,8 @@ class ScenarioTestUnscrambleGame {
     @Test
     fun caseNumber1() {
         //scenarioRule.doWithRecreate(gamePage::assertInitialState)
-        scenarioRule.doWithRecreate { gamePage.assertInitialState() }
+        //scenarioRule.doWithRecreate { gamePage.assertInitialState() }
+        caseNumber4()
 
         gamePage.addInput(text = "fact")
         scenarioRule.doWithRecreate { gamePage.assertInsufficientState() }
@@ -56,8 +58,7 @@ class ScenarioTestUnscrambleGame {
      */
     @Test
     fun caseNumber2() {
-
-        scenarioRule.doWithRecreate { gamePage.assertInitialState() }
+        caseNumber4()
 
         gamePage.clickSkip()
         gamePage = GamePage (word = "never".reversed())
@@ -124,7 +125,7 @@ class ScenarioTestUnscrambleGame {
      */
     @Test
     fun caseNumber3() {
-        scenarioRule.doWithRecreate { gamePage.assertInitialState() }
+        caseNumber4()
 
         //1/
         gamePage.clickSkip()
@@ -194,7 +195,27 @@ class ScenarioTestUnscrambleGame {
         statsPage.clickNewGame()
 
         setup()
-        scenarioRule.doWithRecreate { gamePage.assertInitialState() }
+        caseNumber4()
+    }
+
+    /** UGTC-04 LoadScreen*/
+    @Test
+    fun caseNumber4() {
+        val loadPage = LoadPage()
+
+        scenarioRule.doWithRecreate (loadPage::assertProgressState)
+
+        loadPage.waitTillError()
+
+        scenarioRule.doWithRecreate (loadPage::assertErrorState)
+
+        loadPage.clickRetry()
+
+        scenarioRule.doWithRecreate (loadPage::assertProgressState)
+
+        loadPage.waitTillGone()
+
+        scenarioRule.doWithRecreate (gamePage::assertInitialState)
     }
 
     private fun ActivityScenarioRule<*>.doWithRecreate(block: () -> Unit) {
