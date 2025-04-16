@@ -1,7 +1,7 @@
 package com.github.cawboyroy.expertcoursestudy
 
 import android.view.View
-import com.github.cawboyroy.expertcoursestudy.game.CheckUiState
+import com.github.cawboyroy.expertcoursestudy.game.presentation.CheckUiState
 import com.github.cawboyroy.expertcoursestudy.views.check.UpdateCheckButton
 import junit.framework.TestCase.assertEquals
 import org.junit.Test

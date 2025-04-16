@@ -1,8 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy.di
-
-import com.github.cawboyroy.expertcoursestudy.di.Core
-import com.github.cawboyroy.expertcoursestudy.di.Module
-import com.github.cawboyroy.expertcoursestudy.di.ProvideViewModel
+package com.github.cawboyroy.expertcoursestudy.game.di
 
 @Suppress("UNCHECKED_CAST")
 abstract class AbstractProvideViewModel (

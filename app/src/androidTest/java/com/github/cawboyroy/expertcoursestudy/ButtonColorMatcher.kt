@@ -1,4 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy.game
+package com.github.cawboyroy.expertcoursestudy
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -8,7 +8,7 @@ import androidx.test.espresso.matcher.BoundedMatcher
 import org.hamcrest.Description
 
 class ButtonColorMatcher(private val color: Int) :
-    BoundedMatcher<View, Button> (Button::class.java) {
+    BoundedMatcher<View, Button>(Button::class.java) {
         constructor(colorString: String) : this(Color.parseColor(colorString))
 
         override fun describeTo(description: Description) {

@@ -6,7 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.github.cawboyroy.expertcoursestudy.R
-import com.github.cawboyroy.expertcoursestudy.di.ProvideViewModel
+import com.github.cawboyroy.expertcoursestudy.game.di.MyViewModel
+import com.github.cawboyroy.expertcoursestudy.game.di.ProvideViewModel
 import com.github.cawboyroy.expertcoursestudy.main.Navigation
 
 class MainActivity : AppCompatActivity(), Navigation, ProvideViewModel {

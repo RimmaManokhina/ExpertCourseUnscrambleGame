@@ -1,4 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy.game
+package com.github.cawboyroy.expertcoursestudy.game.presentation
 
 import com.github.cawboyroy.expertcoursestudy.core.Screen
 

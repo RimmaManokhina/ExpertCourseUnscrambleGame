@@ -7,7 +7,7 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import java.io.Serializable
 
-class ErrorView  : AppCompatTextView, UpdateError {
+class ErrorView : AppCompatTextView, UpdateError {
 
     private lateinit var state: ErrorUiState
 
@@ -17,20 +17,21 @@ class ErrorView  : AppCompatTextView, UpdateError {
         context,
         attrs,
         defStyleAttr
-    )    
-        override fun onSaveInstanceState(): Parcelable? {
-            return super.onSaveInstanceState()?.let {
-                val savedState = ErrorSavedState (it)
-                savedState.save(state)
-                return savedState
-            }
+    )
+
+    override fun onSaveInstanceState(): Parcelable? {
+        return super.onSaveInstanceState()?.let {
+            val savedState = ErrorSavedState(it)
+            savedState.save(state)
+            return savedState
         }
-    
-        override fun onRestoreInstanceState(state: Parcelable?) {
-            val restoredState = state as ErrorSavedState
-            super.onRestoreInstanceState(restoredState.superState)
-            update(restoredState.restore())
-        }
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        val restoredState = state as ErrorSavedState
+        super.onRestoreInstanceState(restoredState.superState)
+        update(restoredState.restore())
+    }
 
     override fun update(uiState: ErrorUiState) {
         state = uiState
@@ -39,6 +40,10 @@ class ErrorView  : AppCompatTextView, UpdateError {
 
     override fun updateText(textResId: Int) {
         setText(textResId)
+    }
+
+    override fun updateText(text: String) {
+        setText(text)
     }
 
     override fun updateVisibility(visibility: Int) {
@@ -52,12 +57,14 @@ interface UpdateError {
 
     fun updateText(textResId: Int)
 
+    fun updateText(text: String)
+
     fun updateVisibility(visibility: Int)
 }
 
 interface ErrorUiState : Serializable {
 
-    fun update (updateError: UpdateError)
+    fun update(updateError: UpdateError)
 
     abstract class Abstract(private val visibility: Int) : ErrorUiState {
 
@@ -66,13 +73,21 @@ interface ErrorUiState : Serializable {
         }
     }
 
-    object Hide: Abstract(View.GONE)
+    object Hide : Abstract(View.GONE)
 
-    data class Show(private val resId: Int) : Abstract(View.VISIBLE) {
+    data class ShowRes(private val resId: Int) : Abstract(View.VISIBLE) {
 
         override fun update(updateError: UpdateError) {
             super.update(updateError)
             updateError.updateText(resId)
+        }
+    }
+
+    data class Show(private val message: String) : Abstract(View.VISIBLE) {
+
+        override fun update(updateError: UpdateError) {
+            super.update(updateError)
+            updateError.updateText(message)
         }
     }
 }

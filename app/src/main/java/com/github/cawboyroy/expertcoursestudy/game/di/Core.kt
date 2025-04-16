@@ -1,4 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy.di
+package com.github.cawboyroy.expertcoursestudy.game.di
 
 import android.content.Context
 import com.github.cawboyroy.expertcoursestudy.R

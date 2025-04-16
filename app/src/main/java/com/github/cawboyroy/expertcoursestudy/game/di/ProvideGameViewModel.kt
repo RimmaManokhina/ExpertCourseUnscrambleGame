@@ -1,14 +1,10 @@
 package com.github.cawboyroy.expertcoursestudy.game.di
 
-import com.github.cawboyroy.expertcoursestudy.di.AbstractProvideViewModel
-import com.github.cawboyroy.expertcoursestudy.di.Core
-import com.github.cawboyroy.expertcoursestudy.di.Module
-import com.github.cawboyroy.expertcoursestudy.di.ProvideViewModel
 import com.github.cawboyroy.expertcoursestudy.game.data.GameRepository
-import com.github.cawboyroy.expertcoursestudy.game.GameViewModel
+import com.github.cawboyroy.expertcoursestudy.game.presentation.GameViewModel
 import com.github.cawboyroy.expertcoursestudy.game.data.IntCache
 import com.github.cawboyroy.expertcoursestudy.game.data.ShuffleStrategy
-import com.github.cawboyroy.expertcoursestudy.game.StringCache
+import com.github.cawboyroy.expertcoursestudy.game.data.StringCache
 
 /**GameDi*/
 class ProvideGameViewModel(

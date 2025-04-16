@@ -1,4 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy.game
+package com.github.cawboyroy.expertcoursestudy.game.presentation
 
 import android.os.Bundle
 import android.text.Editable
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.github.cawboyroy.expertcoursestudy.databinding.FragmentGameBinding
-import com.github.cawboyroy.expertcoursestudy.di.ProvideViewModel
+import com.github.cawboyroy.expertcoursestudy.game.di.ProvideViewModel
 import com.github.cawboyroy.expertcoursestudy.stats.NavigateToStats
 
 @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")

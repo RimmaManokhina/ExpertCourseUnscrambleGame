@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.github.cawboyroy.expertcoursestudy.databinding.FragmentStatsBinding
-import com.github.cawboyroy.expertcoursestudy.di.ProvideViewModel
-import com.github.cawboyroy.expertcoursestudy.game.NavigateToGame
+import com.github.cawboyroy.expertcoursestudy.game.di.ProvideViewModel
+import com.github.cawboyroy.expertcoursestudy.game.presentation.NavigateToGame
 
 class StatsFragment : Fragment() {
 

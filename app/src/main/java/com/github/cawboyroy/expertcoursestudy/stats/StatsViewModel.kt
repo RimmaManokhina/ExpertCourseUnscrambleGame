@@ -1,7 +1,7 @@
 package com.github.cawboyroy.expertcoursestudy.stats
 
-import com.github.cawboyroy.expertcoursestudy.di.ClearViewModel
-import com.github.cawboyroy.expertcoursestudy.di.MyViewModel
+import com.github.cawboyroy.expertcoursestudy.game.di.ClearViewModel
+import com.github.cawboyroy.expertcoursestudy.game.di.MyViewModel
 import com.github.cawboyroy.expertcoursestudy.stats.data.StatsRepository
 
 class StatsViewModel(

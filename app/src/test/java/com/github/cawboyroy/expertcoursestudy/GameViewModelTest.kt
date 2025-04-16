@@ -1,8 +1,8 @@
 package com.github.cawboyroy.expertcoursestudy
 
 import com.github.cawboyroy.expertcoursestudy.game.data.GameRepository
-import com.github.cawboyroy.expertcoursestudy.game.GameUiState
-import com.github.cawboyroy.expertcoursestudy.game.GameViewModel
+import com.github.cawboyroy.expertcoursestudy.game.presentation.GameUiState
+import com.github.cawboyroy.expertcoursestudy.game.presentation.GameViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
