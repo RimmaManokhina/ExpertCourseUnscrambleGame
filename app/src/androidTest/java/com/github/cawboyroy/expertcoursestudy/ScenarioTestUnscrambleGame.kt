@@ -2,9 +2,9 @@ package com.github.cawboyroy.expertcoursestudy
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.github.cawboyroy.expertcoursestudy.core.MainActivity
 import com.github.cawboyroy.expertcoursestudy.game.GamePage
 import com.github.cawboyroy.expertcoursestudy.load.LoadPage
-import com.github.cawboyroy.expertcoursestudy.main.MainActivity
 import com.github.cawboyroy.expertcoursestudy.stats.StatsPage
 import org.junit.Before
 import org.junit.Rule
@@ -61,14 +61,14 @@ class ScenarioTestUnscrambleGame {
         caseNumber4()
 
         gamePage.clickSkip()
-        gamePage = GamePage (word = "never".reversed())
+        gamePage = GamePage(word = "never".reversed())
         scenarioRule.doWithRecreate { gamePage.assertInitialState() }
 
         gamePage.addInput(text = "neve")
         scenarioRule.doWithRecreate { gamePage.assertInsufficientState() }
 
         gamePage.clickSkip()
-        gamePage = GamePage (word = "entertain".reversed())
+        gamePage = GamePage(word = "entertain".reversed())
         scenarioRule.doWithRecreate { gamePage.assertInitialState() }
 
         gamePage.addInput(text = "entertai")
@@ -78,7 +78,7 @@ class ScenarioTestUnscrambleGame {
         scenarioRule.doWithRecreate { gamePage.assertSufficientState() }
 
         gamePage.clickSkip()
-        gamePage = GamePage (word = "alligator".reversed())
+        gamePage = GamePage(word = "alligator".reversed())
         scenarioRule.doWithRecreate { gamePage.assertInitialState() }
 
         gamePage.addInput(text = "alligato")
@@ -91,7 +91,7 @@ class ScenarioTestUnscrambleGame {
         scenarioRule.doWithRecreate { gamePage.assertIncorrectState() }
 
         gamePage.clickSkip()
-        gamePage = GamePage (word = "left".reversed())
+        gamePage = GamePage(word = "left".reversed())
         scenarioRule.doWithRecreate { gamePage.assertInitialState() }
 
 
@@ -129,7 +129,7 @@ class ScenarioTestUnscrambleGame {
 
         //1/
         gamePage.clickSkip()
-        gamePage = GamePage (word = "never".reversed())
+        gamePage = GamePage(word = "never".reversed())
         scenarioRule.doWithRecreate { gamePage.assertInitialState() }
 
         //2/
@@ -183,7 +183,7 @@ class ScenarioTestUnscrambleGame {
 
         //7/
         gamePage.clickSkip()
-        gamePage = GamePage (word = "left".reversed())
+        gamePage = GamePage(word = "left".reversed())
         scenarioRule.doWithRecreate { gamePage.assertInitialState() }
 
         //8/

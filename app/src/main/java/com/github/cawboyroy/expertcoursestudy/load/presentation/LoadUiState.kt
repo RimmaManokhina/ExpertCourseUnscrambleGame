@@ -1,7 +1,7 @@
 package com.github.cawboyroy.expertcoursestudy.load.presentation
 
 import com.github.cawboyroy.expertcoursestudy.R
-import com.github.cawboyroy.expertcoursestudy.game.NavigateToGame
+import com.github.cawboyroy.expertcoursestudy.game.presentation.NavigateToGame
 import com.github.cawboyroy.expertcoursestudy.views.error.ErrorUiState
 import com.github.cawboyroy.expertcoursestudy.views.error.UpdateError
 import com.github.cawboyroy.expertcoursestudy.views.visiblebutton.UpdateVisibility

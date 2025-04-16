@@ -1,7 +1,7 @@
 package com.github.cawboyroy.expertcoursestudy
 
-import com.github.cawboyroy.expertcoursestudy.core.MyViewModel
-import com.github.cawboyroy.expertcoursestudy.di.ClearViewModel
+import com.github.cawboyroy.expertcoursestudy.game.di.MyViewModel
+import com.github.cawboyroy.expertcoursestudy.game.di.ClearViewModel
 import junit.framework.TestCase.assertEquals
 
 

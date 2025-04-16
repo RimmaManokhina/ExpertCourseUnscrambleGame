@@ -1,4 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy.game
+package com.github.cawboyroy.expertcoursestudy
 
 import android.view.View
 import androidx.test.espresso.matcher.BoundedMatcher

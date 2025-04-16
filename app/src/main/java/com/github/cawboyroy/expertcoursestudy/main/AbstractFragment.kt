@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.github.cawboyroy.expertcoursestudy.core.MyViewModel
+import com.github.cawboyroy.expertcoursestudy.game.di.MyViewModel
 
 interface AbstractFragment {
 

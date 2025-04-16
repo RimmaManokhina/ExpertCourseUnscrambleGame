@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.cawboyroy.expertcoursestudy.databinding.FragmentLoadBinding
-import com.github.cawboyroy.expertcoursestudy.di.ProvideViewModel
-import com.github.cawboyroy.expertcoursestudy.game.NavigateToGame
+import com.github.cawboyroy.expertcoursestudy.game.di.ProvideViewModel
+import com.github.cawboyroy.expertcoursestudy.game.presentation.NavigateToGame
 import com.github.cawboyroy.expertcoursestudy.load.presentation.LoadUiState
 import com.github.cawboyroy.expertcoursestudy.main.AbstractFragment
 

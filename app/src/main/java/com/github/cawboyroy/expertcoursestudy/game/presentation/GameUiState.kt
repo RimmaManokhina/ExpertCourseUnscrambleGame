@@ -1,6 +1,5 @@
-package com.github.cawboyroy.expertcoursestudy.game
+package com.github.cawboyroy.expertcoursestudy.game.presentation
 
-import android.view.View
 import com.github.cawboyroy.expertcoursestudy.stats.NavigateToStats
 import com.github.cawboyroy.expertcoursestudy.views.check.UpdateCheckButton
 import com.github.cawboyroy.expertcoursestudy.views.input.UpdateInput

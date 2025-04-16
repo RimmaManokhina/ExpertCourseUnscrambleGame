@@ -1,4 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy.game
+package com.github.cawboyroy.expertcoursestudy.game.presentation
 
 import android.view.View
 import com.github.cawboyroy.expertcoursestudy.views.check.UpdateCheckButton

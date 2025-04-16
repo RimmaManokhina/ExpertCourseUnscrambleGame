@@ -1,7 +1,7 @@
-package com.github.cawboyroy.expertcoursestudy.game
+package com.github.cawboyroy.expertcoursestudy.game.presentation
 
-import com.github.cawboyroy.expertcoursestudy.di.ClearViewModel
-import com.github.cawboyroy.expertcoursestudy.di.MyViewModel
+import com.github.cawboyroy.expertcoursestudy.game.di.ClearViewModel
+import com.github.cawboyroy.expertcoursestudy.game.di.MyViewModel
 import com.github.cawboyroy.expertcoursestudy.game.data.GameRepository
 
 class GameViewModel(

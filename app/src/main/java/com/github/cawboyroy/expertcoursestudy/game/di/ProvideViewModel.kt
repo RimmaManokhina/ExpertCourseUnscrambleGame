@@ -1,9 +1,5 @@
-package com.github.cawboyroy.expertcoursestudy.di
+package com.github.cawboyroy.expertcoursestudy.game.di
 
-import com.github.cawboyroy.expertcoursestudy.di.MyViewModel
-import com.github.cawboyroy.expertcoursestudy.di.Core
-import com.github.cawboyroy.expertcoursestudy.di.ProvideViewModel
-import com.github.cawboyroy.expertcoursestudy.game.di.ProvideGameViewModel
 import com.github.cawboyroy.expertcoursestudy.stats.di.ProvideGameOverViewModel
 
 

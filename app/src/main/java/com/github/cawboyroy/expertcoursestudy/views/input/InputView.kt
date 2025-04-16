@@ -6,7 +6,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
-import com.github.cawboyroy.expertcoursestudy.game.InputUiState
+import com.github.cawboyroy.expertcoursestudy.game.presentation.InputUiState
 import com.github.cawboyroy.expertcoursestudy.R
 import com.github.cawboyroy.expertcoursestudy.databinding.InputBinding
 

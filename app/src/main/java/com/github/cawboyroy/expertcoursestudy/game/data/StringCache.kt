@@ -1,4 +1,4 @@
-package com.github.cawboyroy.expertcoursestudy.game
+package com.github.cawboyroy.expertcoursestudy.game.data
 
 import android.content.SharedPreferences
 

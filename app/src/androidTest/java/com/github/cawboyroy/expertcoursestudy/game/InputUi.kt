@@ -1,7 +1,6 @@
 package com.github.cawboyroy.expertcoursestudy.game
 
 import android.view.KeyEvent
-import android.view.View
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions.click
@@ -15,11 +14,11 @@ import androidx.test.espresso.matcher.ViewMatchers.isNotEnabled
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.github.cawboyroy.expertcoursestudy.R
+import com.github.cawboyroy.expertcoursestudy.TextInputLayoutErrorEnabledMatcher
+import com.github.cawboyroy.expertcoursestudy.TextInputLayoutHasErrorText
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import org.hamcrest.CoreMatchers.allOf
-import org.hamcrest.CoreMatchers.not
-import org.hamcrest.Matcher
 
 class InputUi {
 
