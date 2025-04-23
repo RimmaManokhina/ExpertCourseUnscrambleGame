@@ -1,6 +1,7 @@
 package com.github.cawboyroy.expertcoursestudy.game.di
 
 import android.app.Application
+import com.github.cawboyroy.expertcoursestudy.core.Core
 
 class UnscrambleApp : Application(), ProvideViewModel {
 

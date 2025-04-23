@@ -1,5 +1,6 @@
 package com.github.cawboyroy.expertcoursestudy.load.data.cloud
 
+
 import com.github.cawboyroy.expertcoursestudy.R
 import com.github.cawboyroy.expertcoursestudy.load.data.NoInternetConnectionException
 import com.github.cawboyroy.expertcoursestudy.load.data.ServiceUnavailable
@@ -20,6 +21,7 @@ interface HandleError<T> {
     }
 
     class DomainToUi : HandleError<Int> {
+
         override fun handle(error: Exception): Int {
             return when (error) {
                 is NoInternetConnectionException -> R.string.no_internet_connection

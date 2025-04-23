@@ -1,67 +1,79 @@
 package com.github.cawboyroy.expertcoursestudy.load
 
-import com.github.cawboyroy.expertcoursestudy.R
-import com.github.cawboyroy.expertcoursestudy.game.presentation.NavigateToGame
-import com.github.cawboyroy.expertcoursestudy.views.error.ErrorUiState
-import com.github.cawboyroy.expertcoursestudy.views.error.UpdateError
-import com.github.cawboyroy.expertcoursestudy.views.visiblebutton.UpdateVisibility
-import com.github.cawboyroy.expertcoursestudy.views.visiblebutton.VisibilityUiState
+import com.github.cawboyroy.expertcoursestudy.game.di.ClearViewModel
+import com.github.cawboyroy.expertcoursestudy.game.di.MyViewModel
+import com.github.cawboyroy.expertcoursestudy.load.data.LoadRepository
+import com.github.cawboyroy.expertcoursestudy.load.data.cloud.HandleError
+import com.github.cawboyroy.expertcoursestudy.load.presentation.LoadUiObservable
+import com.github.cawboyroy.expertcoursestudy.load.presentation.LoadUiState
 
-interface LoadViewModel {
 
-    fun show(
-        errorTextView: UpdateError,
-        retryButton: UpdateVisibility,
-        progressBar: UpdateVisibility
-    )
+class LoadViewModel(
+    private val handleLoading: HandleLoading,
+    private val repository: LoadRepository,
+    observable: LoadUiObservable,
+    runAsync: RunAsync,
+) : MyViewModel.Abstract<LoadUiState>(runAsync, observable) {
 
-    fun navigate(navigateToGame: NavigateToGame) = Unit
+    private val handleProcessDeath = HandleProcessDeath()
 
-    fun handle(observable: UiObservable<LoadViewModel>) = observable.postUiState(this)
-
-    abstract class Abstract(
-        private val errorUiState: ErrorUiState,
-        private val retryUiState: VisibilityUiState,
-        private val progressUiState: VisibilityUiState
-    ) : LoadViewModel {
-        override fun show(
-            errorTextView: UpdateError,
-            retryButton: UpdateVisibility,
-            progressBar: UpdateVisibility
-        ) {
-            errorTextView.update(errorUiState)
-            retryButton.update(retryUiState)
-            progressBar.update(progressUiState)
+    fun load(isFirstRun: Boolean = true) {
+        if (isFirstRun) {
+            handleProcessDeath.reset()
+            observable.postUiState(LoadUiState.Progress)
+            loadInner()
+        } else if (handleProcessDeath.deathHappened()) {
+            handleProcessDeath.reset()
+            loadInner()
         }
     }
 
-    object Progress : Abstract(ErrorUiState.Hide, VisibilityUiState.Gone, VisibilityUiState.Visible)
-
-    object Success : Abstract(ErrorUiState.Hide, VisibilityUiState.Gone, VisibilityUiState.Gone) {
-
-        override fun navigate(navigateToGame: NavigateToGame) = navigateToGame.navigateToGame()
+    private fun loadInner() {
+        runAsync({ handleLoading.handleLoading(repository::tryLoad) }) { loadingResult ->
+            loadingResult.handle(observable)
+        }
     }
 
-    data object Waiting : LoadViewModel {
+    suspend fun loadInternal() = runAsyncInternal({
+        handleLoading.handleLoading {
+            repository.loadInternal()
+            true
+        }
+    }) {
+        it.handle(observable)
+    }
+}
 
-        override fun show(
-            errorTextView: UpdateError,
-            retryButton: UpdateVisibility,
-            progressBar: UpdateVisibility
-        ) = Unit
+interface HandleLoading {
 
-        override fun handle(observable: UiObservable<LoadViewModel>) = Unit
+    suspend fun handleLoading(block: suspend () -> Boolean): LoadUiState
+
+    class Base(
+        private val clearViewModel: ClearViewModel,
+        private val handleError: HandleError<Int>
+    ) : HandleLoading {
+
+        override suspend fun handleLoading(block: suspend () -> Boolean) = try {
+            val loaded = block.invoke()
+            if (loaded) {
+                clearViewModel.clear(LoadViewModel::class.java)
+                LoadUiState.Success
+            } else
+                LoadUiState.Waiting
+        } catch (e: Exception) {
+            val resource = handleError.handle(e)
+            LoadUiState.ErrorRes(resource)
+        }
+    }
+}
+
+class HandleProcessDeath {
+
+    private var deathHappened = true
+
+    fun reset() {
+        deathHappened = false
     }
 
-    data class ErrorRes(val messageId: Int = R.string.no_internet_connection) : Abstract(
-        ErrorUiState.Show(messageId),
-        VisibilityUiState.Visible,
-        VisibilityUiState.Gone,
-    )
-
-    data class Error(private val message: String) : Abstract(
-        ErrorUiState.ShowRes(message),
-        VisibilityUiState.Visible,
-        VisibilityUiState.Gone,
-    )
+    fun deathHappened() = deathHappened
 }
