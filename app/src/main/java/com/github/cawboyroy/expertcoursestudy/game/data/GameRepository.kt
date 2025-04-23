@@ -1,6 +1,5 @@
 package com.github.cawboyroy.expertcoursestudy.game.data
 
-import com.github.cawboyroy.expertcoursestudy.core.IntCache
 import com.github.cawboyroy.expertcoursestudy.game.data.StringCache
 import com.github.cawboyroy.expertcoursestudy.stats.data.StatsCache
 import com.github.cawboyroy.expertcoursestudy.load.data.cache.WordsCacheDataSource

@@ -5,7 +5,8 @@ interface WordsCloudDataSource {
     suspend fun words() : List<String>
 
     class Base(
-        private val service: WordsService,
+        private val service: Int,
+        create: WordsService,
     ) : WordsCloudDataSource {
 
         override suspend fun words(): List<String> {

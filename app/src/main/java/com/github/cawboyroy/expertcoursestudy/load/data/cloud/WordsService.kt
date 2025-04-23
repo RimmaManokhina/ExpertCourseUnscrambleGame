@@ -9,7 +9,6 @@ interface WordsService {
     //https://ao0ixd.buildship.run/api?words=10
     @GET("api")
     fun words(
-        @Query("words") wordsCount: Int = 10
-    ) : Call<WordsResponseCloud>
-
+        @Query("words") wordsCount: Int
+    ): Call<WordsResponseCloud>
 }

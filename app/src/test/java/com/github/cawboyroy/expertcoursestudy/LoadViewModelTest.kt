@@ -4,7 +4,6 @@ import com.github.cawboyroy.expertcoursestudy.load.HandleLoading
 import com.github.cawboyroy.expertcoursestudy.load.LoadViewModel
 import com.github.cawboyroy.expertcoursestudy.load.RunAsync
 import com.github.cawboyroy.expertcoursestudy.load.UiObservable
-import com.github.cawboyroy.expertcoursestudy.load.data.HandleError
 import com.github.cawboyroy.expertcoursestudy.load.data.LoadRepository
 import com.github.cawboyroy.expertcoursestudy.load.data.Loaded
 import com.github.cawboyroy.expertcoursestudy.load.data.NoInternetConnectionException
@@ -35,9 +34,7 @@ class LoadViewModelTest {
         runAsync = FakeRunAsync()
         handleLoading = FakeHandleLoading()
         viewModel = LoadViewModel(
-            handleLoading, repository, observable, runAsync,
-            clearViewModel = TODO(),
-            handleError = TODO()
+            handleLoading, repository, observable, runAsync
         )
         fragment = FakeFragment()
     }
@@ -84,9 +81,7 @@ class LoadViewModelTest {
         assertEquals(1, fragment.statesList.size)
 
         viewModel = LoadViewModel(
-            handleLoading, repository, observable, runAsync,
-            clearViewModel = TODO(),
-            handleError = TODO()
+            handleLoading, repository, observable, runAsync
         )
 
         viewModel.load(isFirstRun = false)
@@ -146,7 +141,7 @@ interface FakeUiObservable<T : Any> : UiObservable<T> {
 
         override var registerCalledCount: Int = 0
         override var unregisterCalledCount: Int = 0
-        override val postUiStateCalledList: MutableList<T> = mutableListOf()
+        override val postUiStateCalledList: MutableList<T> = MutableListOf()
 
         override fun register(observer: (T) -> Unit) {
             registerCalledCount++
