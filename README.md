@@ -1,2 +1,2 @@
-First Project - Unscramble Game
-This is word game app with XML UI, tested using androidx-junit and androidx-espresso-core frameworks.
+Unscramble Game App. 
+This is word game app built using XML, Jetpack libraries, Espresso, and JUnit for UI and unit testing.
